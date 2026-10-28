@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Free BYOK Model Finder</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Search and filter every free, self-replenishing LLM API model from the awesome-free-byok-models list.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a sticky filter rail on wide screens beside a dense, sortable results table; on phones the rail stacks on top and rows become cards. */
+:root {
+  --bg: #f5f6f9;
+  --surface: #ffffff;
+  --fg: #171a26;
+  --muted: #5c6378;
+  --line: #dde0ea;
+  --accent: #2f45c9;
+  --accent-soft: #e6e9fb;
+  --good: #1d7a4c;
+  --warn: #a55f00;
+  --bad: #b3261e;
+  --font-display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11131b; --surface: #191c27; --fg: #e8eaf2; --muted: #9aa1b8; --line: #2b2f3e;
+    --accent: #8d9cff; --accent-soft: #252b4d; --good: #5fcf94; --warn: #f0b155; --bad: #ff8a80;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11131b; --surface: #191c27; --fg: #e8eaf2; --muted: #9aa1b8; --line: #2b2f3e;
+  --accent: #8d9cff; --accent-soft: #252b4d; --good: #5fcf94; --warn: #f0b155; --bad: #ff8a80;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 15px/1.5 var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 48px;
+}
+[hidden] { display: none !important; }
+a { color: var(--accent); }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 24px; }
+
+header { display: grid; gap: 6px; }
+.eyebrow { font: 500 12px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font: 700 clamp(28px, 4.2vw, 42px)/1.05 var(--font-display); margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+.lede { margin: 0; color: var(--muted); max-width: 64ch; }
+.lede a { color: inherit; }
+
+.layout { display: grid; grid-template-columns: 264px minmax(0, 1fr); gap: 28px; align-items: start; }
+
+/* Filters */
+.filters { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); display: grid; gap: 20px; }
+.field { display: grid; gap: 8px; }
+.field > label, .field > .label { font: 500 12px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.search {
+  width: 100%; padding: 11px 12px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface);
+}
+.search::placeholder { color: var(--muted); }
+select {
+  width: 100%; padding: 9px 10px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface);
+}
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  border: 1px solid var(--line); background: var(--surface); border-radius: 999px;
+  padding: 4px 11px; font-size: 13px; cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.seg { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.seg button { border: 0; background: none; padding: 8px 4px; font-size: 13px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.check { display: flex; gap: 8px; align-items: center; font-size: 14px; cursor: pointer; }
+.check input { accent-color: var(--accent); width: 16px; height: 16px; }
+.reset { justify-self: start; background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; font-size: 14px; }
+
+/* Results */
+.results { display: grid; gap: 12px; min-width: 0; }
+.summary { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; align-items: baseline; }
+.count { font: 600 15px/1.3 var(--font-body); margin: 0; }
+.count span { color: var(--muted); font-weight: 400; }
+.sort-mobile { display: none; }
+
+.table-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th {
+  text-align: left; font: 500 12px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+  border-bottom: 1px solid var(--line); padding: 0; white-space: nowrap;
+}
+th button { all: unset; display: block; padding: 12px 14px; cursor: pointer; }
+th button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+th[aria-sort="ascending"] button::after { content: " ↑"; color: var(--accent); }
+th[aria-sort="descending"] button::after { content: " ↓"; color: var(--accent); }
+td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: color-mix(in srgb, var(--accent-soft) 45%, transparent); }
+.num { text-align: right; }
+th.num button { text-align: right; width: 100%; box-sizing: border-box; }
+
+.model { display: flex; gap: 6px; align-items: flex-start; }
+.model code { font: 400 13.5px/1.45 var(--font-mono); overflow-wrap: anywhere; }
+.alias { display: block; color: var(--muted); font: 12px/1.4 var(--font-mono); margin-top: 2px; }
+.copy {
+  flex: none; border: 1px solid transparent; background: none; border-radius: 6px; cursor: pointer;
+  color: var(--muted); padding: 1px 5px; font: 11px/1.6 var(--font-mono);
+}
+.copy:hover { border-color: var(--line); color: var(--fg); }
+.copy.done { color: var(--good); }
+.provider-btn { all: unset; cursor: pointer; font-weight: 500; color: var(--fg); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+.provider-btn:hover { text-decoration-color: var(--accent); }
+.provider-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.quota { display: block; color: var(--muted); font-size: 12.5px; }
+.tag { display: inline-block; font: 500 12px/1 var(--font-mono); padding: 4px 7px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+.kind { display: inline-block; margin-top: 4px; font: 11px/1 var(--font-mono); color: var(--muted); }
+.lat-fast { color: var(--good); }
+.lat-slow { color: var(--warn); }
+.lat-vslow { color: var(--bad); }
+.empty { padding: 40px 16px; text-align: center; color: var(--muted); }
+
+/* Provider details */
+dialog {
+  border: 1px solid var(--line); border-radius: 14px; padding: 0; width: min(560px, calc(100vw - 32px));
+  background: var(--surface); color: var(--fg); max-height: calc(100vh - 48px);
+}
+dialog::backdrop { background: rgb(10 12 20 / .45); }
+.dlg { padding: 22px; display: grid; gap: 16px; }
+.dlg-head { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+.dlg h2 { font: 700 24px/1.15 var(--font-display); margin: 0; }
+.close { border: 1px solid var(--line); background: none; border-radius: 8px; width: 34px; height: 34px; cursor: pointer; font-size: 18px; line-height: 1; flex: none; }
+.dlg p { margin: 0; color: var(--muted); }
+.kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 10px 16px; margin: 0; }
+.kv dt { font: 500 12px/1.6 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.kv dd { margin: 0; min-width: 0; }
+.kv code { font: 13px/1.5 var(--font-mono); word-break: break-all; }
+.note { display: block; color: var(--muted); font-size: 13px; }
+.caps { display: flex; flex-wrap: wrap; gap: 6px; }
+.cap { font-size: 13px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); }
+.cap.yes { color: var(--good); }
+.cap.partial { color: var(--warn); }
+.cap.no { color: var(--bad); }
+.dlg-links { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; }
+
+footer { color: var(--muted); font-size: 13px; }
+footer code { font-family: var(--font-mono); }
+
+@media (max-width: 860px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .filters { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .filters .field.wide, .filters .reset, .filters .check { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .sort-mobile { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); }
+  .sort-mobile select { width: auto; padding: 6px 8px; }
+  .table-wrap { background: none; border: 0; border-radius: 0; overflow: visible; }
+  thead { display: none; }
+  table, tbody { display: block; }
+  tbody { display: grid; gap: 10px; }
+  tbody tr {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+  }
+  tbody tr:hover { background: var(--surface); }
+  td { border: 0; padding: 0; }
+  td.c-model { grid-column: 1 / -1; }
+  td.c-provider { grid-column: 1 / -1; }
+  td.num { text-align: left; }
+  td.c-ctx::before { content: "Context "; color: var(--muted); font-size: 12px; }
+  td.c-lat::before { content: "Latency "; color: var(--muted); font-size: 12px; }
+  .filters { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .chip, .seg button, .copy { transition: background-color .12s, color .12s, border-color .12s; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">awesome-free-byok-models</div>
+    <h1>Free BYOK Model Finder</h1>
+    <p class="lede">Every free, self-replenishing LLM API model from the list in one table. Filter by what you need, then copy the model ID and base URL into your coding tool. Data comes straight from the
+      <a href="https://github.com/pooyanrad84-netizen/Mrl.awesome-free-byok-models#readme">README</a>.</p>
+  </header>
+
+  <div class="layout">
+    <aside class="filters" aria-label="Filters">
+      <div class="field wide">
+        <label for="q">Search</label>
+        <input id="q" class="search" type="search" placeholder="qwen, deepseek, coder, Groq…" autocomplete="off">
+      </div>
+      <div class="field wide">
+        <span class="label" id="use-label">Best for</span>
+        <div class="chips" id="uses" role="group" aria-labelledby="use-label"></div>
+      </div>
+      <div class="field">
+        <label for="ctx">Minimum context</label>
+        <select id="ctx">
+          <option value="0">Any size</option>
+          <option value="32000">32K+</option>
+          <option value="128000">128K+</option>
+          <option value="256000">256K+</option>
+          <option value="1000000">1M+</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="lat">Maximum latency</label>
+        <select id="lat">
+          <option value="0">Any speed</option>
+          <option value="0.5">Under 0.5s</option>
+          <option value="1">Under 1s</option>
+          <option value="2">Under 2s</option>
+          <option value="5">Under 5s</option>
+        </select>
+      </div>
+      <div class="field wide">
+        <span class="label" id="type-label">Free tier</span>
+        <div class="seg" id="types" role="group" aria-labelledby="type-label">
+          <button type="button" data-type="all" aria-pressed="true">All</button>
+          <button type="button" data-type="replenishable" aria-pressed="false" title="Quota resets daily, weekly or monthly">Resets</button>
+          <button type="button" data-type="non-replenishable" aria-pressed="false" title="Free models with no quota cycle">Always $0</button>
+        </div>
+      </div>
+      <label class="check"><input id="tools" type="checkbox"> Provider supports tool calls</label>
+      <button type="button" class="reset" id="reset">Clear all filters</button>
+    </aside>
+
+    <section class="results" aria-live="polite">
+      <div class="summary">
+        <p class="count" id="count">Loading models…</p>
+        <label class="sort-mobile" for="sort-m">Sort
+          <select id="sort-m">
+            <option value="model:asc">Model A–Z</option>
+            <option value="provider:asc">Provider A–Z</option>
+            <option value="context:desc">Largest context</option>
+            <option value="latency:asc">Fastest</option>
+          </select>
+        </label>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-key="model" aria-sort="ascending"><button type="button">Model</button></th>
+              <th data-key="provider"><button type="button">Provider</button></th>
+              <th data-key="best"><button type="button">Best for</button></th>
+              <th data-key="context" class="num"><button type="button">Context</button></th>
+              <th data-key="latency" class="num"><button type="button">Latency</button></th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div class="empty" id="empty" hidden>No models match these filters. Try a shorter search or clear a filter.</div>
+      </div>
+    </section>
+  </div>
+
+  <footer>Free tiers change often. Check the provider's console before you build on one. Latency is time to first token from the list's last verification run.
+    Regenerate this page's data with <code>python scripts/build_site.py</code>.</footer>
+</div>
+
+<dialog id="dlg" aria-labelledby="dlg-title">
+  <div class="dlg">
+    <div class="dlg-head">
+      <div>
+        <div class="eyebrow" id="dlg-kind"></div>
+        <h2 id="dlg-title"></h2>
+      </div>
+      <button type="button" class="close" id="dlg-close" aria-label="Close">×</button>
+    </div>
+    <p id="dlg-desc"></p>
+    <dl class="kv">
+      <dt>Base URL</dt>
+      <dd><div class="model"><code id="dlg-base"></code><button type="button" class="copy" id="dlg-copy">copy</button></div><span class="note" id="dlg-note"></span></dd>
+      <dt>Free quota</dt><dd id="dlg-quota"></dd>
+      <dt>Models</dt><dd id="dlg-models"></dd>
+      <dt>Verified</dt><dd id="dlg-verified"></dd>
+    </dl>
+    <div class="caps" id="dlg-caps"></div>
+    <div class="dlg-links">
+      <a id="dlg-site" target="_blank" rel="noopener">Get an API key ↗</a>
+      <a id="dlg-readme" target="_blank" rel="noopener">Full entry in the README ↗</a>
+      <button type="button" class="reset" id="dlg-filter">Show only this provider</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  const README_URL = "https://github.com/pooyanrad84-netizen/Mrl.awesome-free-byok-models#";
+  const USES = ["Code", "General", "Reasoning", "Agent", "Vision", "Translation", "Fallback"];
+  const CAP_LABELS = { tool_calls: "Tool calls", schema: "Schema", error_handling: "Error handling", rate_limit_safe: "Rate-limit safe" };
+  const CAP_MARK = { yes: "✓", partial: "~", no: "✗", unknown: "?" };
+
+  const $ = (id) => document.getElementById(id);
+  const state = { q: "", uses: new Set(), ctx: 0, lat: 0, type: "all", tools: false, sort: "model", dir: 1 };
+  let providers = [];
+  let models = [];
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+
+  async function copyText(text, btn) {
+    try {
+      await navigator.clipboard.writeText(text);
+      btn.textContent = "copied";
+      btn.classList.add("done");
+      setTimeout(() => { btn.textContent = "copy"; btn.classList.remove("done"); }, 1400);
+    } catch (e) {
+      const code = btn.parentElement.querySelector("code");
+      if (code) {
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      btn.textContent = "select + copy";
+    }
+  }
+
+  // Let long model IDs wrap after "/", "-" or ":" rather than mid-word.
+  function wrapId(s) {
+    return esc(s).replace(/([/:-])/g, "$1<wbr>");
+  }
+
+  function latClass(s) {
+    if (s == null) return "";
+    if (s < 1) return "lat-fast";
+    if (s >= 5) return "lat-vslow";
+    if (s >= 2) return "lat-slow";
+    return "";
+  }
+
+  function load(data) {
+    providers = data.providers;
+    providers.forEach((p, pi) => {
+      p.index = pi;
+      p.models.forEach((m) => {
+        models.push({
+          ...m,
+          provider: p,
+          haystack: [m.id, ...(m.aliases || []), p.name, m.best_for].join(" ").toLowerCase(),
+        });
+      });
+    });
+
+    $("uses").innerHTML = USES.filter((u) => models.some((m) => m.best_for === u))
+      .map((u) => `<button type="button" class="chip" data-use="${u}" aria-pressed="false">${u}</button>`).join("");
+    render();
+  }
+
+  function filtered() {
+    const terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+    return models.filter((m) =>
+      terms.every((t) => m.haystack.includes(t)) &&
+      (state.uses.size === 0 || state.uses.has(m.best_for)) &&
+      (!state.ctx || (m.context_tokens || 0) >= state.ctx) &&
+      (!state.lat || (m.latency_s != null && m.latency_s < state.lat)) &&
+      (state.type === "all" || m.provider.type === state.type) &&
+      (!state.tools || m.provider.capabilities.tool_calls === "yes")
+    );
+  }
+
+  function sortKey(m) {
+    switch (state.sort) {
+      case "provider": return m.provider.name.toLowerCase();
+      case "best": return m.best_for;
+      case "context": return m.context_tokens ?? -1;
+      case "latency": return m.latency_s ?? Infinity;
+      default: return m.id.toLowerCase();
+    }
+  }
+
+  function render() {
+    const list = filtered().sort((a, b) => {
+      const ka = sortKey(a), kb = sortKey(b);
+      if (ka < kb) return -state.dir;
+      if (ka > kb) return state.dir;
+      return a.id.localeCompare(b.id);
+    });
+
+    const providerCount = new Set(list.map((m) => m.provider.name)).size;
+    $("count").innerHTML = `${list.length} of ${models.length} models <span>from ${providerCount} of ${providers.length} providers</span>`;
+    $("empty").hidden = list.length > 0;
+
+    $("rows").innerHTML = list.map((m) => `
+      <tr>
+        <td class="c-model"><div class="model"><div><code>${wrapId(m.id)}</code>${
+          m.aliases && m.aliases.length ? `<span class="alias">also ${m.aliases.map(wrapId).join(", ")}</span>` : ""
+        }</div><button type="button" class="copy" data-copy="${esc(m.id)}" aria-label="Copy model ID ${esc(m.id)}">copy</button></div></td>
+        <td class="c-provider"><button type="button" class="provider-btn" data-provider="${m.provider.index}">${esc(m.provider.name)}</button>
+          <span class="quota">${esc(m.provider.quota)}</span></td>
+        <td class="c-best"><span class="tag">${esc(m.best_for)}</span></td>
+        <td class="num c-ctx">${esc(m.context)}</td>
+        <td class="num c-lat ${latClass(m.latency_s)}">${esc(m.latency)}</td>
+      </tr>`).join("");
+
+    document.querySelectorAll("th[data-key]").forEach((th) => {
+      th.setAttribute("aria-sort", th.dataset.key === state.sort ? (state.dir > 0 ? "ascending" : "descending") : "none");
+    });
+    const mobileValue = `${state.sort}:${state.dir > 0 ? "asc" : "desc"}`;
+    if ([...$("sort-m").options].some((o) => o.value === mobileValue)) $("sort-m").value = mobileValue;
+  }
+
+  function openProvider(p) {
+    $("dlg-kind").textContent = p.type === "replenishable" ? "Quota resets" : "Free models, always $0";
+    $("dlg-title").textContent = p.name;
+    $("dlg-desc").textContent = p.description;
+    $("dlg-base").textContent = p.base_url;
+    $("dlg-note").textContent = p.base_url_note;
+    $("dlg-note").hidden = !p.base_url_note;
+    $("dlg-quota").textContent = p.quota;
+    $("dlg-models").textContent = `${p.models.length} free model${p.models.length === 1 ? "" : "s"} listed`;
+    $("dlg-verified").textContent = p.verified;
+    $("dlg-caps").innerHTML = Object.entries(CAP_LABELS)
+      .map(([k, label]) => {
+        const v = p.capabilities[k] || "unknown";
+        return `<span class="cap ${v}">${CAP_MARK[v]} ${label}</span>`;
+      }).join("");
+    $("dlg-site").href = p.url;
+    $("dlg-readme").href = README_URL + p.anchor;
+    $("dlg-filter").onclick = () => {
+      state.q = p.name;
+      $("q").value = p.name;
+      $("dlg").close();
+      render();
+    };
+    $("dlg-copy").textContent = "copy";
+    $("dlg").showModal();
+  }
+
+  // Events
+  $("q").addEventListener("input", (e) => { state.q = e.target.value; render(); });
+  $("ctx").addEventListener("change", (e) => { state.ctx = +e.target.value; render(); });
+  $("lat").addEventListener("change", (e) => { state.lat = +e.target.value; render(); });
+  $("tools").addEventListener("change", (e) => { state.tools = e.target.checked; render(); });
+  $("uses").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-use]");
+    if (!b) return;
+    const u = b.dataset.use;
+    state.uses.has(u) ? state.uses.delete(u) : state.uses.add(u);
+    b.setAttribute("aria-pressed", state.uses.has(u));
+    render();
+  });
+  $("types").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-type]");
+    if (!b) return;
+    state.type = b.dataset.type;
+    $("types").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b));
+    render();
+  });
+  $("reset").addEventListener("click", () => {
+    Object.assign(state, { q: "", ctx: 0, lat: 0, type: "all", tools: false });
+    state.uses.clear();
+    $("q").value = ""; $("ctx").value = "0"; $("lat").value = "0"; $("tools").checked = false;
+    document.querySelectorAll("[data-use]").forEach((b) => b.setAttribute("aria-pressed", "false"));
+    $("types").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x.dataset.type === "all"));
+    render();
+  });
+  document.querySelector("thead").addEventListener("click", (e) => {
+    const th = e.target.closest("th[data-key]");
+    if (!th) return;
+    const key = th.dataset.key;
+    if (state.sort === key) state.dir = -state.dir;
+    else { state.sort = key; state.dir = key === "context" ? -1 : 1; }
+    render();
+  });
+  $("sort-m").addEventListener("change", (e) => {
+    const [key, dir] = e.target.value.split(":");
+    state.sort = key; state.dir = dir === "asc" ? 1 : -1;
+    render();
+  });
+  $("rows").addEventListener("click", (e) => {
+    const c = e.target.closest("[data-copy]");
+    if (c) return copyText(c.dataset.copy, c);
+    const p = e.target.closest("[data-provider]");
+    if (p) openProvider(providers[+p.dataset.provider]);
+  });
+  $("dlg-copy").addEventListener("click", (e) => copyText($("dlg-base").textContent, e.currentTarget));
+  $("dlg-close").addEventListener("click", () => $("dlg").close());
+  $("dlg").addEventListener("click", (e) => { if (e.target === $("dlg")) $("dlg").close(); });
+
+  fetch("models.json")
+    .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(load)
+    .catch(() => {
+      $("count").textContent = "Couldn't load models.json. Open this page through a web server (for example GitHub Pages or `python -m http.server`), not straight from disk.";
+    });
+})();
+</script>
+</body>
+</html>
