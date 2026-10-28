@@ -1,0 +1,5427 @@
+{
+ "providers": [
+  {
+   "name": "AION Labs",
+   "url": "https://www.aionlabs.ai",
+   "anchor": "aion-labs",
+   "type": "replenishable",
+   "description": "AION Labs provides storytelling-optimized models through an OpenAI-compatible API. The free tier offers 20,000 tokens/day and 15 RPM -- a solid option if you need a daily token allowance for lightweight coding and creative tasks. AION Labs currently has 5 models verified.",
+   "quota": "15 RPM / 20,000 TPD",
+   "base_url": "https://api.aionlabs.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "partial",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "aion-labs/aion-2.0",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.4s",
+     "latency_s": 1.4
+    },
+    {
+     "id": "aion-labs/aion-3.0",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    },
+    {
+     "id": "aion-labs/aion-3.0-mini",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "aion-labs/aion-3.5",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~1.4s",
+     "latency_s": 1.4
+    },
+    {
+     "id": "aion-labs/aion-3.5-mini",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    }
+   ]
+  },
+  {
+   "name": "AnyAPI AI",
+   "url": "https://anyapi.ai",
+   "anchor": "anyapi-ai",
+   "type": "replenishable",
+   "description": "AnyAPI is a unified API gateway providing access to 400+ models from OpenAI, Anthropic, Google, DeepSeek, Meta, Mistral, Cohere, and more through a single OpenAI-compatible endpoint. The free tier offers 100,000 tokens/day with access to free and basic models. AnyAPI currently has 5 models verified.",
+   "quota": "100,000 tokens/day / No Credit Card",
+   "base_url": "https://api.anyapi.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "dots-studio/dots-3-note-preview:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    },
+    {
+     "id": "google/gemma-4-26b-a4b-it:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~8.8s",
+     "latency_s": 8.8
+    },
+    {
+     "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~9.1s",
+     "latency_s": 9.1
+    },
+    {
+     "id": "nvidia/nemotron-3.5-lightning:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    }
+   ]
+  },
+  {
+   "name": "Cloudflare Workers AI",
+   "url": "https://dash.cloudflare.com",
+   "anchor": "cloudflare-workers-ai",
+   "type": "replenishable",
+   "description": "Cloudflare Workers AI runs models on Cloudflare's global edge network using serverless GPUs. The free tier offers 10,000 requests/day shared across all models with near-zero latency from edge locations worldwide. Cloudflare Workers AI currently has 24 models verified.",
+   "quota": "150 to 1,500 RPM / 100,000 RPD / 13,000 TPD",
+   "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/v1",
+   "base_url_note": "replace {account_id} with your Cloudflare account ID",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "@cf/qwen/qwen2.5-coder-32b-instruct",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "Code",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "@cf/aisingapore/gemma-sea-lion-v4-27b-it",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.5s",
+     "latency_s": 0.5
+    },
+    {
+     "id": "@cf/google/gemma-2b-it-lora",
+     "aliases": [],
+     "context": "8K",
+     "context_tokens": 8000,
+     "best_for": "Fallback",
+     "latency": "~0.5s",
+     "latency_s": 0.5
+    },
+    {
+     "id": "@cf/google/gemma-4-26b-a4b-it",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~0.5s",
+     "latency_s": 0.5
+    },
+    {
+     "id": "@cf/meta/llama-3.2-1b-instruct",
+     "aliases": [],
+     "context": "60K",
+     "context_tokens": 60000,
+     "best_for": "Fallback",
+     "latency": "~0.6s",
+     "latency_s": 0.6
+    },
+    {
+     "id": "@cf/meta/llama-3.2-3b-instruct",
+     "aliases": [],
+     "context": "80K",
+     "context_tokens": 80000,
+     "best_for": "Fallback",
+     "latency": "~0.5s",
+     "latency_s": 0.5
+    },
+    {
+     "id": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+     "aliases": [],
+     "context": "24K",
+     "context_tokens": 24000,
+     "best_for": "Reasoning",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    },
+    {
+     "id": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~0.6s",
+     "latency_s": 0.6
+    },
+    {
+     "id": "@cf/mistral/mistral-7b-instruct-v0.2-lora",
+     "aliases": [],
+     "context": "15K",
+     "context_tokens": 15000,
+     "best_for": "Fallback",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "@cf/mistralai/mistral-small-3.1-24b-instruct",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.8s",
+     "latency_s": 0.8
+    },
+    {
+     "id": "@cf/moonshotai/kimi-k2.7-code",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Code",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    },
+    {
+     "id": "@cf/nvidia/nemotron-3-120b-a12b",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "@cf/openai/gpt-oss-120b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "@cf/openai/gpt-oss-20b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.6s",
+     "latency_s": 0.6
+    },
+    {
+     "id": "@cf/qwen/qwen3-30b-a3b-fp8",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    },
+    {
+     "id": "@cf/qwen/qwen3.8-27b",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "@cf/zai-org/glm-4.7-flash",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Agent",
+     "latency": "~0.5s",
+     "latency_s": 0.5
+    },
+    {
+     "id": "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+     "aliases": [],
+     "context": "80K",
+     "context_tokens": 80000,
+     "best_for": "Reasoning",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "@cf/google/gemma-7b-it-lora",
+     "aliases": [],
+     "context": "3K",
+     "context_tokens": 3000,
+     "best_for": "General",
+     "latency": "~1.1s",
+     "latency_s": 1.1
+    },
+    {
+     "id": "@cf/ibm-granite/granite-4.0-h-micro",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    },
+    {
+     "id": "@cf/meta-llama/llama-2-7b-chat-hf-lora",
+     "aliases": [],
+     "context": "8K",
+     "context_tokens": 8000,
+     "best_for": "Fallback",
+     "latency": "~0.5s",
+     "latency_s": 0.5
+    },
+    {
+     "id": "@cf/meta/llama-3.1-8b-instruct-fp8",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    },
+    {
+     "id": "@cf/meta/llama-3.2-11b-vision-instruct",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    },
+    {
+     "id": "@cf/qwen/qwq-32b",
+     "aliases": [],
+     "context": "24K",
+     "context_tokens": 24000,
+     "best_for": "Reasoning",
+     "latency": "~0.8s",
+     "latency_s": 0.8
+    }
+   ]
+  },
+  {
+   "name": "Cohere AI",
+   "url": "https://dashboard.cohere.com",
+   "anchor": "cohere-ai",
+   "type": "replenishable",
+   "description": "Cohere focuses on enterprise-grade NLP with their Command model family -- built for RAG, tool use, and coding workflows. The free API tier offers replenishable credits with daily resets, and nearly every model delivers sub-second responses. Cohere AI currently has 11 models verified.",
+   "quota": "20 RPM / 1,000 API calls per month",
+   "base_url": "https://api.cohere.com/v2",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "command-a-03-2025",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Agent",
+     "latency": "~0.55s",
+     "latency_s": 0.55
+    },
+    {
+     "id": "c4ai-aya-vision-32b",
+     "aliases": [],
+     "context": "16K",
+     "context_tokens": 16000,
+     "best_for": "Vision",
+     "latency": "~0.55s",
+     "latency_s": 0.55
+    },
+    {
+     "id": "command-a-plus-05-2026",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Agent",
+     "latency": "~0.55s",
+     "latency_s": 0.55
+    },
+    {
+     "id": "command-a-vision-07-2025",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~0.55s",
+     "latency_s": 0.55
+    },
+    {
+     "id": "command-r-08-2024",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.51s",
+     "latency_s": 0.51
+    },
+    {
+     "id": "command-r-plus-08-2024",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~0.54s",
+     "latency_s": 0.54
+    },
+    {
+     "id": "command-r7b-12-2024",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~0.5s",
+     "latency_s": 0.5
+    },
+    {
+     "id": "command-r7b-arabic-02-2025",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.56s",
+     "latency_s": 0.56
+    },
+    {
+     "id": "c4ai-aya-expanse-32b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.82s",
+     "latency_s": 0.82
+    },
+    {
+     "id": "command-a-reasoning-08-2025",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~0.66s",
+     "latency_s": 0.66
+    },
+    {
+     "id": "command-a-translate-08-2025",
+     "aliases": [],
+     "context": "8K",
+     "context_tokens": 8000,
+     "best_for": "Fallback",
+     "latency": "~0.55s",
+     "latency_s": 0.55
+    }
+   ]
+  },
+  {
+   "name": "ElectronHub",
+   "url": "https://electronhub.ai",
+   "anchor": "electronhub",
+   "type": "replenishable",
+   "description": "ElectronHub is a credit-based inference hub offering an enormous catalog of models from OpenAI, Google, Meta, Mistral, Cohere, DeepSeek, Qwen, Microsoft, and more through an OpenAI-compatible endpoint. The free tier provides 5 RPM with $0.25 in weekly credits -- replenishes every week, but the dollar cap limits heavy usage. Best for targeted queries and efficient coding. The catalog is far larger than what is listed here -- this section is curated to the 45 strongest models, excluding safety, guard, roleplay, and uncensored variants. ElectronHub currently has 45 models verified.",
+   "quota": "5 RPM / $0.25 Weekly Credits",
+   "base_url": "https://api.electronhub.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "no"
+   },
+   "models": [
+    {
+     "id": "codestral-latest",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Code",
+     "latency": "~2.03s",
+     "latency_s": 2.03
+    },
+    {
+     "id": "command-nightly",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.84s",
+     "latency_s": 1.84
+    },
+    {
+     "id": "command-r-08-2024",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.11s",
+     "latency_s": 2.11
+    },
+    {
+     "id": "deepseek-r1-distill-qwen-32b",
+     "aliases": [],
+     "context": "80K",
+     "context_tokens": 80000,
+     "best_for": "Reasoning",
+     "latency": "~1.77s",
+     "latency_s": 1.77
+    },
+    {
+     "id": "deepseek-v4-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~2.44s",
+     "latency_s": 2.44
+    },
+    {
+     "id": "deepseek-v4-flash-0731",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~3.66s",
+     "latency_s": 3.66
+    },
+    {
+     "id": "deepseek-v4-flash-thinking",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~2.03s",
+     "latency_s": 2.03
+    },
+    {
+     "id": "devstral-2512",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Code",
+     "latency": "~2.95s",
+     "latency_s": 2.95
+    },
+    {
+     "id": "devstral-small-latest",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~1.41s",
+     "latency_s": 1.41
+    },
+    {
+     "id": "gemini-2.5-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~5.40s",
+     "latency_s": 5.4
+    },
+    {
+     "id": "gemini-2.5-flash-lite",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~5.41s",
+     "latency_s": 5.41
+    },
+    {
+     "id": "gemini-2.5-flash-lite-thinking",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~1.52s",
+     "latency_s": 1.52
+    },
+    {
+     "id": "gemini-2.5-flash-thinking",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~1.82s",
+     "latency_s": 1.82
+    },
+    {
+     "id": "gemini-3.5-flash-lite",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~4.69s",
+     "latency_s": 4.69
+    },
+    {
+     "id": "gemma-4-26b-a4b-it",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~2.54s",
+     "latency_s": 2.54
+    },
+    {
+     "id": "glm-4.7-flash",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.40s",
+     "latency_s": 2.4
+    },
+    {
+     "id": "gpt-4.1",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.57s",
+     "latency_s": 1.57
+    },
+    {
+     "id": "gpt-4.1-mini",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.26s",
+     "latency_s": 1.26
+    },
+    {
+     "id": "gpt-4o",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.51s",
+     "latency_s": 1.51
+    },
+    {
+     "id": "gpt-5-mini",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~5.61s",
+     "latency_s": 5.61
+    },
+    {
+     "id": "gpt-5.4-mini",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~2.07s",
+     "latency_s": 2.07
+    },
+    {
+     "id": "gpt-5.4-nano",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~1.57s",
+     "latency_s": 1.57
+    },
+    {
+     "id": "gpt-5.6-luna",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~3.22s",
+     "latency_s": 3.22
+    },
+    {
+     "id": "gpt-6-luna",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~10.26s",
+     "latency_s": 10.26
+    },
+    {
+     "id": "gpt-oss-120b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~2.64s",
+     "latency_s": 2.64
+    },
+    {
+     "id": "gpt-oss-20b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~6.84s",
+     "latency_s": 6.84
+    },
+    {
+     "id": "labs-devstral-small-2512",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~7.05s",
+     "latency_s": 7.05
+    },
+    {
+     "id": "llama-3-70b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.58s",
+     "latency_s": 1.58
+    },
+    {
+     "id": "llama-4-scout-17b-16e-instruct",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~11.24s",
+     "latency_s": 11.24
+    },
+    {
+     "id": "minimax-m3",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~2.13s",
+     "latency_s": 2.13
+    },
+    {
+     "id": "mistral-large-latest",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~4.18s",
+     "latency_s": 4.18
+    },
+    {
+     "id": "mistral-medium-latest",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~6.96s",
+     "latency_s": 6.96
+    },
+    {
+     "id": "nemotron-3-nano-omni-30b-a3b-reasoning",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~2.16s",
+     "latency_s": 2.16
+    },
+    {
+     "id": "nemotron-3-super-120b-a12b",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~2.03s",
+     "latency_s": 2.03
+    },
+    {
+     "id": "nemotron-3-ultra-550b-a55b",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~3.46s",
+     "latency_s": 3.46
+    },
+    {
+     "id": "nemotron-3.5-lightning",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~2.19s",
+     "latency_s": 2.19
+    },
+    {
+     "id": "north-mini-code-1-0",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Code",
+     "latency": "~2.75s",
+     "latency_s": 2.75
+    },
+    {
+     "id": "phi-4",
+     "aliases": [],
+     "context": "16K",
+     "context_tokens": 16000,
+     "best_for": "General",
+     "latency": "~2.06s",
+     "latency_s": 2.06
+    },
+    {
+     "id": "qwen-2.5-72b-instruct",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.70s",
+     "latency_s": 2.7
+    },
+    {
+     "id": "qwen-2.5-coder-32b-instruct",
+     "aliases": [],
+     "context": "33K",
+     "context_tokens": 33000,
+     "best_for": "Code",
+     "latency": "~0.59s",
+     "latency_s": 0.59
+    },
+    {
+     "id": "qwen3-30b-a3b-instruct-2507",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~1.53s",
+     "latency_s": 1.53
+    },
+    {
+     "id": "qwen3-coder-30-a3b-instruct",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "Code",
+     "latency": "~2.29s",
+     "latency_s": 2.29
+    },
+    {
+     "id": "qwen3.7-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~5.97s",
+     "latency_s": 5.97
+    },
+    {
+     "id": "qwen3.8-27b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~8.31s",
+     "latency_s": 8.31
+    },
+    {
+     "id": "qwen3.8-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~6.47s",
+     "latency_s": 6.47
+    }
+   ]
+  },
+  {
+   "name": "EvolveX",
+   "url": "https://evolvex.gg",
+   "anchor": "evolvex",
+   "type": "replenishable",
+   "description": "EvolveX is a lightweight inference hub offering models from Google, Meta, MiniMax, NVIDIA, Poolside, OpenAI, and Moonshot through an OpenAI-compatible endpoint. The free tier provides 5 RPM with unspecified RPD -- generous for light coding and general tasks with a diverse model pool. EvolveX currently has 14 models verified.",
+   "quota": "5 RPM / Unspecified RPD",
+   "base_url": "https://api.evolvex.gg/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "partial"
+   },
+   "models": [
+    {
+     "id": "claude-haiku-4-5",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~2.5s",
+     "latency_s": 2.5
+    },
+    {
+     "id": "google/diffusiongemma-26b-a4b-it",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~2.56s",
+     "latency_s": 2.56
+    },
+    {
+     "id": "meta/llama-3.2-11b-vision-instruct",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~1.06s",
+     "latency_s": 1.06
+    },
+    {
+     "id": "meta/muse-glimmer-30b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~5.36s",
+     "latency_s": 5.36
+    },
+    {
+     "id": "nvidia/ising-calibration-1.5-31b",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~5.99s",
+     "latency_s": 5.99
+    },
+    {
+     "id": "nvidia/nemotron-3-super-120b-a12b",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~2.21s",
+     "latency_s": 2.21
+    },
+    {
+     "id": "nvidia/nemotron-3-ultra-550b-a55b",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~14.78s",
+     "latency_s": 14.78
+    },
+    {
+     "id": "nvidia/nemotron-3.5-lightning-30b-a3b",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~13.55s",
+     "latency_s": 13.55
+    },
+    {
+     "id": "nvidia/riva-translate-4b-instruct-v1.1",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "Translation",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "nvidia/riva-translate-4b-instruct-v2",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "Translation",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "openai/gpt-oss-20b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Code",
+     "latency": "~2.3s",
+     "latency_s": 2.3
+    },
+    {
+     "id": "openai/gpt-5-2",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~10.07s",
+     "latency_s": 10.07
+    },
+    {
+     "id": "poolside/laguna-xs-2.1",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~5.23s",
+     "latency_s": 5.23
+    }
+   ]
+  },
+  {
+   "name": "Free.ai",
+   "url": "https://free.ai",
+   "anchor": "freeai",
+   "type": "replenishable",
+   "description": "Free.ai is a lightweight inference service offering self-hosted models via an OpenAI-compatible API. The free tier provides 10 RPM with 30,000 TPD and 1,000 requests per month for currently available self-hosted models. Free.ai currently has 4 models verified.",
+   "quota": "10 RPM / 30,000 TPD / 1,000 Requests per month / Currently available self-hosted models only",
+   "base_url": "https://api.free.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "qwen-vl",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "Vision",
+     "latency": "~2.31s",
+     "latency_s": 2.31
+    },
+    {
+     "id": "qwen25-vl",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "Vision",
+     "latency": "~1.67s",
+     "latency_s": 1.67
+    },
+    {
+     "id": "qwen3-8b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.37s",
+     "latency_s": 1.37
+    },
+    {
+     "id": "qwen7b",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~2.65s",
+     "latency_s": 2.65
+    }
+   ]
+  },
+  {
+   "name": "FreeInference",
+   "url": "https://freeinference.org",
+   "anchor": "freeinference",
+   "type": "replenishable",
+   "description": "FreeInference is a research-backed inference hub providing access to models from GLM, MiniMax, Qwen, and DeepSeek through an OpenAI-compatible endpoint. The free tier offers $20 in daily credits with 2 concurrent requests. FreeInference currently has 4 models verified.",
+   "quota": "$20 CPD / 2 Max Concurrent Requests",
+   "base_url": "https://freeinference.org/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "deepseek-v4-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~1.1s",
+     "latency_s": 1.1
+    },
+    {
+     "id": "glm-5.3-flash",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.05s",
+     "latency_s": 1.05
+    },
+    {
+     "id": "minimax-m3",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.35s",
+     "latency_s": 1.35
+    },
+    {
+     "id": "qwen3.6-35b",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "Code",
+     "latency": "~0.96s",
+     "latency_s": 0.96
+    }
+   ]
+  },
+  {
+   "name": "Gonka Broker",
+   "url": "https://gonkabroker.com/",
+   "anchor": "gonka-broker",
+   "type": "replenishable",
+   "description": "Gonka Broker is a proxy gateway routing requests to providers through a single OpenAI-compatible endpoint. The free tier offers 6 RPM with 1M tokens per month -- tight for sustained use, but the sub-second latencies make it a solid fallback for quick queries. Gonka Broker currently has 3 models verified.",
+   "quota": "6 RPM / ~1M tokens per month",
+   "base_url": "https://proxy.gonkabroker.com/v1/",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "partial",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "deepseek-ai/DeepSeek-V4-Flash-0731",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "Reasoning",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "MiniMaxAI/MiniMax-M2.7",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "Reasoning",
+     "latency": "~0.74s",
+     "latency_s": 0.74
+    },
+    {
+     "id": "zai-org/GLM-5.3-Flash",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    }
+   ]
+  },
+  {
+   "name": "Google Gemini",
+   "url": "https://aistudio.google.com",
+   "anchor": "google-gemini",
+   "type": "replenishable",
+   "description": "Gemini offers large context windows on paper, but the free tier's rate limits vary by model -- Flash-lite variants enjoy ~500 RPD, while standard models can be as low as 20 RPD. Use Gemini for quick, targeted tasks and single-file edits -- not marathon sessions. Google Gemini currently has 17 models verified.",
+   "quota": "5-20 RPM / 20-500 RPD / 1M TPM / Uncapped TPD",
+   "base_url": "https://generativelanguage.googleapis.com/v1beta",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "models/gemini-2.5-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Fallback",
+     "latency": "~1.1s",
+     "latency_s": 1.1
+    },
+    {
+     "id": "models/gemini-2.5-flash-lite",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Fallback",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    },
+    {
+     "id": "models/gemini-3-flash-preview",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "models/gemini-3.1-flash-lite",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "models/gemini-3.1-flash-lite-preview",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Fallback",
+     "latency": "~1.0s",
+     "latency_s": 1.0
+    },
+    {
+     "id": "models/gemini-3.5-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "models/gemini-3.5-flash-lite",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "models/gemini-3.5-transcribe",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "models/gemini-3.6-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Code",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "models/gemini-3.7-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.8s",
+     "latency_s": 1.8
+    },
+    {
+     "id": "models/gemini-3.8-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.8s",
+     "latency_s": 1.8
+    },
+    {
+     "id": "models/gemini-3.8-flash-lite-tts",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "models/gemini-3.8-flash-tts",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "models/gemini-flash-latest",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "models/gemini-flash-lite-latest",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    },
+    {
+     "id": "models/gemini-robotics-er-2-preview",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~2.5s",
+     "latency_s": 2.5
+    },
+    {
+     "id": "models/gemma-4-26b-a4b-it",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    }
+   ]
+  },
+  {
+   "name": "Groq API",
+   "url": "https://console.groq.com",
+   "anchor": "groq-api",
+   "type": "replenishable",
+   "description": "Groq provides low-latency inference. The free tier offers 30 RPM with replenishable daily credits -- enough for most use cases. Verification measures sub-300ms latency. Groq API currently has 4 models verified.",
+   "quota": "30 RPM / 14,400 RPD / 18,000 TPM",
+   "base_url": "https://api.groq.com/openai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "allam-2-7b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Fallback",
+     "latency": "~0.2s",
+     "latency_s": 0.2
+    },
+    {
+     "id": "openai/gpt-oss-120b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Code",
+     "latency": "~0.4s",
+     "latency_s": 0.4
+    },
+    {
+     "id": "openai/gpt-oss-20b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Code",
+     "latency": "~0.6s",
+     "latency_s": 0.6
+    },
+    {
+     "id": "qwen/qwen3.8-27b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Code",
+     "latency": "~0.3s",
+     "latency_s": 0.3
+    }
+   ]
+  },
+  {
+   "name": "HelixMind",
+   "url": "https://helixmind.online",
+   "anchor": "helixmind",
+   "type": "replenishable",
+   "description": "HelixMind is a lightweight inference hub offering a small set of free models from Meta, OpenAI, Mistral, and DeepSeek through an OpenAI-compatible endpoint. The free tier provides 3 RPM with 50 requests per day -- the tightest cap on this list, strictly for occasional queries and quick tests. HelixMind currently has 5 models verified.",
+   "quota": "3 RPM / 50 RPD",
+   "base_url": "https://helixmind.online/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "deepseek-v4-flash-0731-thinking",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~2.86s",
+     "latency_s": 2.86
+    },
+    {
+     "id": "gpt-oss-20b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~2.4s",
+     "latency_s": 2.4
+    },
+    {
+     "id": "llama-4-scout",
+     "aliases": [],
+     "context": "328K",
+     "context_tokens": 328000,
+     "best_for": "General",
+     "latency": "~1.1s",
+     "latency_s": 1.1
+    },
+    {
+     "id": "mimo-v2.5",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Code",
+     "latency": "~1.1s",
+     "latency_s": 1.1
+    },
+    {
+     "id": "qwen3.6-35b-a3b",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~2.1s",
+     "latency_s": 2.1
+    }
+   ]
+  },
+  {
+   "name": "Intern AI",
+   "url": "https://internlm.intern-ai.org.cn",
+   "anchor": "intern-ai",
+   "type": "replenishable",
+   "description": "Intern AI is the official API from Shanghai AI Laboratory for the InternLM model family. The free tier offers 90 million tokens per month. Intern AI currently has 11 models verified.",
+   "quota": "30 RPM / 300,000 TPM / 90,000,000 Tokens per month (3,000,000 TPD)",
+   "base_url": "https://chat.intern-ai.org.cn/api/v1/",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "intern-latest",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~1.0s",
+     "latency_s": 1.0
+    },
+    {
+     "id": "intern-s1",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.2s",
+     "latency_s": 1.2
+    },
+    {
+     "id": "intern-s1-mini",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "Fallback",
+     "latency": "~1.0s",
+     "latency_s": 1.0
+    },
+    {
+     "id": "intern-s1-pro",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "intern-s2",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~1.0s",
+     "latency_s": 1.0
+    },
+    {
+     "id": "intern-s2-preview",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~1.0s",
+     "latency_s": 1.0
+    },
+    {
+     "id": "intern-s2-preview-35b",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "intern-s2-preview-397b",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~10.5s",
+     "latency_s": 10.5
+    },
+    {
+     "id": "internvl-latest",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~1.0s",
+     "latency_s": 1.0
+    },
+    {
+     "id": "internvl3.5-241b-a28b",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "Vision",
+     "latency": "~1.1s",
+     "latency_s": 1.1
+    },
+    {
+     "id": "internvl3.5-latest",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "Vision",
+     "latency": "~1.0s",
+     "latency_s": 1.0
+    }
+   ]
+  },
+  {
+   "name": "IteraCompute",
+   "url": "https://iteracompute.com",
+   "anchor": "iteracompute",
+   "type": "replenishable",
+   "description": "IteraCompute is an OpenAI-compatible inference hub currently offering a single free model. The free tier provides 30M tokens per month at 160,000 TPM with a 128,000-token context limit -- a high-volume allowance, though the sole free model took 58 seconds to return its first token in verification. IteraCompute currently has 1 models verified.",
+   "quota": "30M tokens/month / 160K TPM / 128K context",
+   "base_url": "https://api.iteracompute.com/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "partial"
+   },
+   "models": [
+    {
+     "id": "qwen/qwen3.8-27b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~58.47s",
+     "latency_s": 58.47
+    }
+   ]
+  },
+  {
+   "name": "Kilo Gateway",
+   "url": "https://app.kilo.ai",
+   "anchor": "kilo-gateway",
+   "type": "replenishable",
+   "description": "Kilo Gateway is a coding-agent platform that proxies free models from OpenRouter, NVIDIA, Poolside, and others through a single API key. The free tier offers generous replenishable credits with no hard daily cap -- a solid Swiss-army-knife provider that gives you access to a diverse model pool through one endpoint. Kilo Gateway currently has 10 models verified.",
+   "quota": "5 RPM / 200 RPD",
+   "base_url": "https://api.kilo.ai/api/gateway",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "cohere/north-mini-code:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "dots-studio/dots-3-note-preview:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    },
+    {
+     "id": "liquid/lfm-2.5-2.6b:free",
+     "aliases": [],
+     "context": "65K",
+     "context_tokens": 65000,
+     "best_for": "General",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    },
+    {
+     "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~2.5s",
+     "latency_s": 2.5
+    },
+    {
+     "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~14.78s",
+     "latency_s": 14.78
+    },
+    {
+     "id": "nvidia/nemotron-3.5-lightning:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "nvidia/nemotron-3.5-super-vl:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "Vision",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    },
+    {
+     "id": "poolside/laguna-s-2.1:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "Code",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "recursive/flint-v1.0:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "reflection/beam-free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.0s",
+     "latency_s": 2.0
+    }
+   ]
+  },
+  {
+   "name": "LiteRouter",
+   "url": "https://literouter.com",
+   "anchor": "literouter",
+   "type": "replenishable",
+   "description": "LiteRouter is a lightweight inference hub offering free models from OpenAI, DeepSeek, Mistral, Meta, and more through an OpenAI-compatible endpoint with a :free suffix. The free tier provides uncapped daily requests with 1 concurrent request and 15,000 tokens per day -- enough for light scripting and targeted queries. LiteRouter currently has 42 models verified.",
+   "quota": "Unlimited Requests (for some Free models) / 1 concurrent request / 7s Cooldown",
+   "base_url": "https://api.literouter.com/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "no",
+    "error_handling": "yes",
+    "rate_limit_safe": "partial"
+   },
+   "models": [
+    {
+     "id": "deepseek-v3.1:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~3.0s",
+     "latency_s": 3.0
+    },
+    {
+     "id": "deepseek-v3.2:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~3.0s",
+     "latency_s": 3.0
+    },
+    {
+     "id": "deepseek-v4-flash-cheap:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~3.0s",
+     "latency_s": 3.0
+    },
+    {
+     "id": "deepseek-v4-flash:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~3.0s",
+     "latency_s": 3.0
+    },
+    {
+     "id": "deepseek-v4.1-flash-1017:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~3.0s",
+     "latency_s": 3.0
+    },
+    {
+     "id": "deepseek-v4.1-flash-cheap:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~3.0s",
+     "latency_s": 3.0
+    },
+    {
+     "id": "deepseek-v4.1-flash-stable:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~3.0s",
+     "latency_s": 3.0
+    },
+    {
+     "id": "glm-4.7-flash:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.40s",
+     "latency_s": 2.4
+    },
+    {
+     "id": "glm-5.1-cheap:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~4.0s",
+     "latency_s": 4.0
+    },
+    {
+     "id": "glm-5.2-cheap:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~4.0s",
+     "latency_s": 4.0
+    },
+    {
+     "id": "glm-5.3-cheap:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~4.0s",
+     "latency_s": 4.0
+    },
+    {
+     "id": "glm-5.3-flash-cheap:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~4.0s",
+     "latency_s": 4.0
+    },
+    {
+     "id": "glm-5.3-flash:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.05s",
+     "latency_s": 1.05
+    },
+    {
+     "id": "kimi-k2.6-cheap:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~3.5s",
+     "latency_s": 3.5
+    },
+    {
+     "id": "kimi-k2.7-code-cheap:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "kimi-k2.8:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "llama-3.3-70b-instruct-turbo:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.18s",
+     "latency_s": 2.18
+    },
+    {
+     "id": "magistral-small:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "Reasoning",
+     "latency": "~3.0s",
+     "latency_s": 3.0
+    },
+    {
+     "id": "minimax-m2-cheap:free",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~6.76s",
+     "latency_s": 6.76
+    },
+    {
+     "id": "minimax-m2.1-cheap:free",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~6.76s",
+     "latency_s": 6.76
+    },
+    {
+     "id": "minimax-m2.5-cheap:free",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~6.76s",
+     "latency_s": 6.76
+    },
+    {
+     "id": "minimax-m2.7-cheap:free",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~6.76s",
+     "latency_s": 6.76
+    },
+    {
+     "id": "minimax-m3-cheap:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~2.13s",
+     "latency_s": 2.13
+    },
+    {
+     "id": "minimax-m3.1-flash:free",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~4.5s",
+     "latency_s": 4.5
+    },
+    {
+     "id": "ministral-3-14b-instruct:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~3.5s",
+     "latency_s": 3.5
+    },
+    {
+     "id": "ministral-3-3b-instruct:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.5s",
+     "latency_s": 2.5
+    },
+    {
+     "id": "ministral-3-8b-instruct:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.8s",
+     "latency_s": 2.8
+    },
+    {
+     "id": "ministral-3b-2512:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~3.21s",
+     "latency_s": 3.21
+    },
+    {
+     "id": "mistral-large-3:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~4.0s",
+     "latency_s": 4.0
+    },
+    {
+     "id": "mistral-small-4:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~2.3s",
+     "latency_s": 2.3
+    },
+    {
+     "id": "qwen-3.8-27b:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~8.31s",
+     "latency_s": 8.31
+    },
+    {
+     "id": "qwen3-235b-a22b:free",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~5.0s",
+     "latency_s": 5.0
+    },
+    {
+     "id": "qwen3-32b:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~3.0s",
+     "latency_s": 3.0
+    },
+    {
+     "id": "qwen3-coder-30b-a3b-instruct:free",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Code",
+     "latency": "~3.5s",
+     "latency_s": 3.5
+    },
+    {
+     "id": "qwen3-coder-next:free",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Code",
+     "latency": "~3.5s",
+     "latency_s": 3.5
+    },
+    {
+     "id": "qwen3-coder:free",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Code",
+     "latency": "~3.0s",
+     "latency_s": 3.0
+    },
+    {
+     "id": "qwen3-next-80b-a3b-instruct:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~4.0s",
+     "latency_s": 4.0
+    },
+    {
+     "id": "qwen3-vl-235b-a22b-instruct:free",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Vision",
+     "latency": "~5.5s",
+     "latency_s": 5.5
+    },
+    {
+     "id": "qwen3.5-35b-a3b:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~2.8s",
+     "latency_s": 2.8
+    },
+    {
+     "id": "qwen3.5-9b:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.5s",
+     "latency_s": 2.5
+    },
+    {
+     "id": "qwen3.6-35b-a3b:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~2.8s",
+     "latency_s": 2.8
+    },
+    {
+     "id": "qwen3.8-flash:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~6.47s",
+     "latency_s": 6.47
+    }
+   ]
+  },
+  {
+   "name": "LLM.Kiwi",
+   "url": "https://llm.kiwi",
+   "anchor": "llmkiwi",
+   "type": "replenishable",
+   "description": "LLM.Kiwi is a Cloudflare-edge inference provider offering an auto-routing endpoint that selects the best available model automatically, plus a Croatian-specific model. The free tier offers 40 requests per hour. LLM.Kiwi currently has 1 models verified.",
+   "quota": "40 RPH / No Credit Card",
+   "base_url": "https://api.llm.kiwi/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "partial",
+    "schema": "no",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "auto",
+     "aliases": [],
+     "context": "Varies",
+     "context_tokens": null,
+     "best_for": "General",
+     "latency": "~1.0s",
+     "latency_s": 1.0
+    }
+   ]
+  },
+  {
+   "name": "LLM7.IO",
+   "url": "https://llm7.io",
+   "anchor": "llm7io",
+   "type": "replenishable",
+   "description": "LLM7.IO is a rising inference provider serving open-weight models via Llama.cpp server with OpenAI-compatible endpoints. The Turbo Tier (Free tier) offers replenishable credits with no daily hard cap -- a solid option for consistent daily coding on a simple API without commitment. LLM7.IO currently has 5 models verified -- all at Turbo Tier (Free tier).",
+   "quota": "40 RPM / 2,400 RPD / 128,000 Characters per Request / 1,000,000 TPD",
+   "base_url": "https://api.llm7.io/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "codestral-latest",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "Code",
+     "latency": "~1.0s",
+     "latency_s": 1.0
+    },
+    {
+     "id": "gpt-oss:20b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "minimax-m2.7",
+     "aliases": [],
+     "context": "180K",
+     "context_tokens": 180000,
+     "best_for": "Reasoning",
+     "latency": "~1.8s",
+     "latency_s": 1.8
+    },
+    {
+     "id": "mistral-Nemo-Instruct-2407",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~3.1s",
+     "latency_s": 3.1
+    },
+    {
+     "id": "nemotron-3-nano:30b",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~2.1s",
+     "latency_s": 2.1
+    }
+   ]
+  },
+  {
+   "name": "MegaNova AI",
+   "url": "https://meganova.ai",
+   "anchor": "meganova-ai",
+   "type": "replenishable",
+   "description": "MegaNova AI is a community-model inference hub offering fine-tuned variants of Llama, Mistral, and its own Manta series through an OpenAI-compatible endpoint. The free tier provides 60 RPM with 550 requests per day and 200,000 tokens per minute -- generous throughput for a community model hub. MegaNova AI currently has 7 models verified.",
+   "quota": "60 RPM / 550 RPD / 200,000 TPM",
+   "base_url": "https://api.meganova.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "BruhzWater/Sapphira-L3.3-70b-0.1",
+     "aliases": [],
+     "context": "65K",
+     "context_tokens": 65000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "FallenMerick/MN-Violet-Lotus-12B",
+     "aliases": [],
+     "context": "8K",
+     "context_tokens": 8000,
+     "best_for": "General",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "Sao10K/L3-70B-Euryale-v2.1",
+     "aliases": [],
+     "context": "8K",
+     "context_tokens": 8000,
+     "best_for": "General",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "Sao10K/L3-8B-Stheno-v3.2",
+     "aliases": [],
+     "context": "8K",
+     "context_tokens": 8000,
+     "best_for": "General",
+     "latency": "~1.0s",
+     "latency_s": 1.0
+    },
+    {
+     "id": "Steelskull/L3.3-MS-Nevoria-70b",
+     "aliases": [],
+     "context": "65K",
+     "context_tokens": 65000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "meganova-ai/manta-flash-1.0",
+     "aliases": [],
+     "context": "16K",
+     "context_tokens": 16000,
+     "best_for": "General",
+     "latency": "~1.1s",
+     "latency_s": 1.1
+    },
+    {
+     "id": "meganova-ai/manta-mini-1.0",
+     "aliases": [],
+     "context": "8K",
+     "context_tokens": 8000,
+     "best_for": "General",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    }
+   ]
+  },
+  {
+   "name": "Mistral AI",
+   "url": "https://console.mistral.ai",
+   "anchor": "mistral-ai",
+   "type": "replenishable",
+   "description": "Mistral AI provides models with a focus on instruction following and tool use. The free tier offers replenishable credits with per-model rate limits. Mistral AI currently has 12 models verified (with aliases).",
+   "quota": "~2-30 RPM / 50,000 TPM shared pool",
+   "base_url": "https://api.mistral.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "codestral-latest",
+     "aliases": [
+      "codestral-2508"
+     ],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Code",
+     "latency": "~0.4s",
+     "latency_s": 0.4
+    },
+    {
+     "id": "ministral-14b-latest",
+     "aliases": [
+      "ministral-14b-2512"
+     ],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.4s",
+     "latency_s": 0.4
+    },
+    {
+     "id": "ministral-8b-latest",
+     "aliases": [
+      "ministral-8b-2512"
+     ],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.5s",
+     "latency_s": 0.5
+    },
+    {
+     "id": "ministral-3b-latest",
+     "aliases": [
+      "ministral-3b-2512"
+     ],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.4s",
+     "latency_s": 0.4
+    },
+    {
+     "id": "mistral-code-fim-latest",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~0.4s",
+     "latency_s": 0.4
+    },
+    {
+     "id": "mistral-code-latest",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~0.4s",
+     "latency_s": 0.4
+    },
+    {
+     "id": "voxtral-small-latest",
+     "aliases": [
+      "voxtral-small-2507"
+     ],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.6s",
+     "latency_s": 0.6
+    }
+   ]
+  },
+  {
+   "name": "Mixlayer",
+   "url": "https://www.mixlayer.com",
+   "anchor": "mixlayer",
+   "type": "replenishable",
+   "description": "Mixlayer is an inference platform for open-source AI models with an OpenAI-compatible API. The free tier offers qwen/qwen3.5-4b-free for prototyping with rate limits. A focused Qwen 3.5/3.6 catalog with tool calling and reasoning support. Mixlayer currently has 1 model verified.",
+   "quota": "20 RPM / Can be rate-limited (daily usage)",
+   "base_url": "https://models.mixlayer.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "qwen/qwen3.5-4b-free",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~1.0s",
+     "latency_s": 1.0
+    }
+   ]
+  },
+  {
+   "name": "Naga AI",
+   "url": "https://naga.ac",
+   "anchor": "naga-ai",
+   "type": "replenishable",
+   "description": "Naga AI is a lightweight inference hub offering a small set of free models from NVIDIA and Meta through an OpenAI-compatible endpoint. The free tier provides 10 RPM with 100 requests per day -- a very tight cap that limits it to occasional queries and quick debugging. Naga AI currently has 7 models verified.",
+   "quota": "10 RPM / 100 RPD",
+   "base_url": "https://api.naga.ac/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "dots-3-note-preview:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    },
+    {
+     "id": "flint-v1.0:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "lfm-2.5-2.6b:free",
+     "aliases": [],
+     "context": "65K",
+     "context_tokens": 65000,
+     "best_for": "General",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    },
+    {
+     "id": "nemotron-3-ultra-550b-a55b:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.07s",
+     "latency_s": 1.07
+    },
+    {
+     "id": "nemotron-3.5-lightning:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    },
+    {
+     "id": "nemotron-3.5-super-vl:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "Vision",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    },
+    {
+     "id": "xing4.0-29b-a4b:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~2.0s",
+     "latency_s": 2.0
+    }
+   ]
+  },
+  {
+   "name": "NVIDIA NIM",
+   "url": "https://build.nvidia.com",
+   "anchor": "nvidia-nim",
+   "type": "replenishable",
+   "description": "NVIDIA NIM is NVIDIA's free API catalog offering 100+ models from DeepSeek, Meta, Mistral, Google, Qwen, and more through OpenAI-compatible endpoints. The largest free model library on the list, but 40 RPM per model caps it as a backup pool rather than a daily driver. Only models tagged as Free Endpoint (hosted on NVIDIA's own infrastructure) are listed below. NVIDIA NIM currently has 12 models verified.",
+   "quota": "40 RPM / Uncapped TPD",
+   "base_url": "https://integrate.api.nvidia.com/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "no",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "google/diffusiongemma-26b-a4b-it",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "meta/llama-3.2-11b-vision-instruct",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~1.0s",
+     "latency_s": 1.0
+    },
+    {
+     "id": "meta/llama-3.2-90b-vision-instruct",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "meta/muse-glimmer-30b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "nvidia/ising-calibration-1.5-31b",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~0.4s",
+     "latency_s": 0.4
+    },
+    {
+     "id": "nvidia/nemotron-3-super-120b-a12b",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "nvidia/nemotron-3-ultra-550b-a55b",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~14.78s",
+     "latency_s": 14.78
+    },
+    {
+     "id": "nvidia/riva-translate-4b-instruct-v1.1",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "Translation",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "nvidia/riva-translate-4b-instruct-v2",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "Translation",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "openai/gpt-oss-20b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~2.0s",
+     "latency_s": 2.0
+    },
+    {
+     "id": "poolside/laguna-xs-2.1",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    }
+   ]
+  },
+  {
+   "name": "Ollama Cloud",
+   "url": "https://ollama.com",
+   "anchor": "ollama-cloud",
+   "type": "replenishable",
+   "description": "Ollama Cloud is a cloud-hosted inference service running Ollama behind the scenes, offering a vast model registry without the need to run locally. The free tier gives you a 5-hour session window that resets weekly -- uncapped during that window but limited by the weekly refresh. Models respond cleanly and quickly, making it one of the stronger free providers for coding if you plan around the session. Ollama Cloud currently has 7 models verified.",
+   "quota": "1 Instance / 5-Hour Session Usage / 7-day Weekly Usage",
+   "base_url": "https://api.ollama.com",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "beam",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.0s",
+     "latency_s": 2.0
+    },
+    {
+     "id": "gemma4:31b",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~3.8s",
+     "latency_s": 3.8
+    },
+    {
+     "id": "gpt-oss:120b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "gpt-oss:20b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "nemotron-3-nano:30b",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~2.1s",
+     "latency_s": 2.1
+    },
+    {
+     "id": "nemotron-3-super",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~2.0s",
+     "latency_s": 2.0
+    },
+    {
+     "id": "nemotron-3-ultra",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    }
+   ]
+  },
+  {
+   "name": "Onomeo",
+   "url": "https://onomeo.com",
+   "anchor": "onomeo",
+   "type": "replenishable",
+   "description": "Onomeo is a lightweight inference hub serving models from Cohere, DeepSeek, GLM, Google, Mistral, NVIDIA, OpenAI, and Qwen through an OpenAI-compatible endpoint. The free tier offers 20 calls per 5-hour window for free models -- a modest but predictable quota for light scripting and targeted queries. Onomeo currently has 17 models verified.",
+   "quota": "Free models only / 20 calls per 5-hour window",
+   "base_url": "https://onomeo.com/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "partial",
+    "rate_limit_safe": "partial"
+   },
+   "models": [
+    {
+     "id": "Qwen/Qwen3.8-27B",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.95s",
+     "latency_s": 1.95
+    },
+    {
+     "id": "Qwen/Qwen3.8-Flash-Next",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~2.29s",
+     "latency_s": 2.29
+    },
+    {
+     "id": "Shanghai_AI_Laboratory/Intern-S2-Preview",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~11.73s",
+     "latency_s": 11.73
+    },
+    {
+     "id": "cohere/north-mini-code:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~0.99s",
+     "latency_s": 0.99
+    },
+    {
+     "id": "deepseek-ai/DeepSeek-V4-Pro-0813",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~4.58s",
+     "latency_s": 4.58
+    },
+    {
+     "id": "deepseek-v4-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~2.88s",
+     "latency_s": 2.88
+    },
+    {
+     "id": "dots-studio/dots-3-note-preview:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~2.3s",
+     "latency_s": 2.3
+    },
+    {
+     "id": "gemini-3-flash-preview",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.98s",
+     "latency_s": 1.98
+    },
+    {
+     "id": "glm-4.5-flash",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.18s",
+     "latency_s": 2.18
+    },
+    {
+     "id": "glm-5.2",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.2s",
+     "latency_s": 2.2
+    },
+    {
+     "id": "inclusionai/ling-3.0-flash-sante:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~1.88s",
+     "latency_s": 1.88
+    },
+    {
+     "id": "minimax-m2.7",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "ministral-14b-latest",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.43s",
+     "latency_s": 1.43
+    },
+    {
+     "id": "nvidia/nemotron-3-super-120b-a12b",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.56s",
+     "latency_s": 1.56
+    },
+    {
+     "id": "openai/gpt-oss-20b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Code",
+     "latency": "~1.41s",
+     "latency_s": 1.41
+    },
+    {
+     "id": "poolside/laguna-s-2.1:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "Code",
+     "latency": "~11.25s",
+     "latency_s": 11.25
+    },
+    {
+     "id": "stepfun/step-3.7-flash:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.94s",
+     "latency_s": 2.94
+    }
+   ]
+  },
+  {
+   "name": "Orcarouter",
+   "url": "https://orcarouter.ai",
+   "anchor": "orcarouter",
+   "type": "replenishable",
+   "description": "Orcarouter is an API gateway offering free models via an OpenAI-compatible API. The free tier has unspecified rate limits (they exist, but are not mentioned) for free models, which means that it can be suited for light coding and general conversations. Orcarouter currently has 4 models verified.",
+   "quota": "Unspecified rate limits / Free models only",
+   "base_url": "https://api.orcarouter.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "deepseek/deepseek-v4-flash-free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.62s",
+     "latency_s": 1.62
+    },
+    {
+     "id": "tencent/hy3-free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.88s",
+     "latency_s": 1.88
+    },
+    {
+     "id": "tencent/hy4-preview-free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~2.09s",
+     "latency_s": 2.09
+    },
+    {
+     "id": "z-ai/glm-5.3-flash-free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.63s",
+     "latency_s": 1.63
+    }
+   ]
+  },
+  {
+   "name": "Poixe AI",
+   "url": "https://poixe.com",
+   "anchor": "poixe-ai",
+   "type": "replenishable",
+   "description": "Poixe AI is a unified API gateway aggregating models from OpenAI, Anthropic, Google, xAI, ByteDance, Alibaba, Moonshot, and more through a single OpenAI-compatible endpoint. The free tier offers 10,000 requests per day with 10 million daily tokens. Append :free to any model name to access the free tier; may be rate-limited depending on model. Poixe AI currently has 23 models verified.",
+   "quota": "10,000 RPD / 10,000,000 TPD",
+   "base_url": "https://api.poixe.com/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "partial",
+    "error_handling": "yes",
+    "rate_limit_safe": "partial"
+   },
+   "models": [
+    {
+     "id": "gemini-2.5-flash-lite:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~5.41s",
+     "latency_s": 5.41
+    },
+    {
+     "id": "gemini-2.5-flash:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~5.40s",
+     "latency_s": 5.4
+    },
+    {
+     "id": "gemini-2.5-pro:free",
+     "aliases": [],
+     "context": "2M",
+     "context_tokens": 2000000,
+     "best_for": "Reasoning",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "gemini-3-flash-preview:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "gpt-3.5-turbo:free",
+     "aliases": [],
+     "context": "16K",
+     "context_tokens": 16000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "gpt-4.1-mini-2025-04-14:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Code",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    },
+    {
+     "id": "gpt-4.1-mini:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Code",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    },
+    {
+     "id": "gpt-4.1-nano-2025-04-14:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Code",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    },
+    {
+     "id": "gpt-4.1-nano:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Code",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    },
+    {
+     "id": "gpt-4o-mini-2024-07-18:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "gpt-5-nano:free",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "gpt-oss-120b:free",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "grok-3-beta:free",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Reasoning",
+     "latency": "~3.4s",
+     "latency_s": 3.4
+    },
+    {
+     "id": "grok-3-mini-beta:free",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Reasoning",
+     "latency": "~3.4s",
+     "latency_s": 3.4
+    },
+    {
+     "id": "grok-3-mini:free",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Reasoning",
+     "latency": "~3.4s",
+     "latency_s": 3.4
+    },
+    {
+     "id": "grok-4:free",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~3.4s",
+     "latency_s": 3.4
+    },
+    {
+     "id": "qwen-long:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "qwen-plus-2025-04-28:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "qwen-plus-latest:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "qwen-plus:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "qwen3-14b:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "qwen3-32b:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "qwen3-8b:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.4s",
+     "latency_s": 1.4
+    }
+   ]
+  },
+  {
+   "name": "Pooled AI",
+   "url": "https://ai.pooled.dev",
+   "anchor": "pooled-ai",
+   "type": "replenishable",
+   "description": "Pooled AI is a lightweight inference hub offering official MiniMax models through an OpenAI-compatible endpoint. The free tier provides 1M TPD with access to MiniMax M2.5, M2.7, and M3 official variants -- solid for general tasks and reasoning with generous daily tokens. Pooled AI currently has 3 models verified.",
+   "quota": "1M TPD / MiniMax models only",
+   "base_url": "https://ai.pooled.dev/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "MiniMax-M2.5-Official",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~2.58s",
+     "latency_s": 2.58
+    },
+    {
+     "id": "MiniMax-M2.7-Official",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~2.37s",
+     "latency_s": 2.37
+    },
+    {
+     "id": "MiniMax-M3-Official",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.55s",
+     "latency_s": 1.55
+    }
+   ]
+  },
+  {
+   "name": "Poolside",
+   "url": "https://poolside.ai",
+   "anchor": "poolside",
+   "type": "replenishable",
+   "description": "Poolside is a foundation model lab building purpose-built coding models from scratch. Laguna S and XS models are trained on 30T tokens exclusively for agentic software engineering with tool calling and 256K context. The models are free while in preview -- the same \"use it while it lasts\" uncertainty as any free provider. Poolside currently has 2 models verified.",
+   "quota": "20 RPM / 200 RPD / 150,000 TPM / 1,000,000 TPD",
+   "base_url": "https://inference.poolside.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "partial",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "poolside/laguna-s-2.1",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Code",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "poolside/laguna-xs-2.1",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    }
+   ]
+  },
+  {
+   "name": "Routeway AI",
+   "url": "https://routeway.ai",
+   "anchor": "routeway-ai",
+   "type": "replenishable",
+   "description": "Routeway is a unified API gateway offering free models through a :free model suffix -- a pattern shared with OpenRouter and Kilo Code. Models are drawn from Stepfun, NVIDIA, Poolside, Meta, and others, all accessed through a single OpenAI-compatible endpoint. The tight 5 RPM cap makes Routeway a fallback hub rather than a daily driver. Routeway currently has 8 models verified.",
+   "quota": "5 RPM / 200 RPD / 300,000 TPD",
+   "base_url": "https://api.routeway.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "partial",
+    "error_handling": "yes",
+    "rate_limit_safe": "partial"
+   },
+   "models": [
+    {
+     "id": "deepseek-v4-flash:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~3.7s",
+     "latency_s": 3.7
+    },
+    {
+     "id": "gemma-4-26b-a4b-it-chimerax:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "gemma-4-26b-a4b-it-luminous:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "gemma-4-26b-a4b-it-meromero:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "gemma-4-26b-a4b-it-moonlight:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "gemma-4-26b-a4b-it-musica:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "minimax-m2.7:free",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~6.76s",
+     "latency_s": 6.76
+    },
+    {
+     "id": "muse-glimmer-30b:free",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~2.96s",
+     "latency_s": 2.96
+    }
+   ]
+  },
+  {
+   "name": "SEA-LION",
+   "url": "https://playground.sea-lion.ai",
+   "anchor": "sea-lion",
+   "type": "replenishable",
+   "description": "SEA-LION is a family of Southeast Asian language models by AI Singapore, offering open models via an OpenAI-compatible API. The free tier provides 10 RPM. SEA-LION currently has 5 models verified.",
+   "quota": "10 RPM",
+   "base_url": "https://api.sea-lion.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "aisingapore/Gemma-SEA-LION-v4-27B-IT",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~1.64s",
+     "latency_s": 1.64
+    },
+    {
+     "id": "aisingapore/Llama-SEA-LION-v3-70B-IT",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.55s",
+     "latency_s": 1.55
+    },
+    {
+     "id": "aisingapore/Qwen-SEA-LION-v4-32B-IT",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.69s",
+     "latency_s": 1.69
+    },
+    {
+     "id": "aisingapore/Qwen-SEA-LION-v4.5-27B-IT",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.68s",
+     "latency_s": 1.68
+    },
+    {
+     "id": "aisingapore/Nemotron-SEA-LION-v4.8-120B-A12B",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.63s",
+     "latency_s": 1.63
+    }
+   ]
+  },
+  {
+   "name": "SimpleLLM",
+   "url": "https://app.simplellm.eu/dashboard",
+   "anchor": "simplellm",
+   "type": "replenishable",
+   "description": "SimpleLLM is an OpenAI-compatible gateway serving free models from Google, Meta, and others. The free tier provides 100 requests/hour, 1,000 requests/day, 50,000 tokens/hour, and 500,000 tokens/day -- generous daily allowances that reset automatically, so it is one of the easier tiers to plan around. SimpleLLM currently has 1 model verified.",
+   "quota": "100 RPH / 1,000 RPD / 50,000 TPH / 500,000 TPD",
+   "base_url": "https://api.simplellm.eu/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "partial",
+    "schema": "partial",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "gemma-4-E4B",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.33s",
+     "latency_s": 1.33
+    }
+   ]
+  },
+  {
+   "name": "TokenReply",
+   "url": "https://tokenreply.com",
+   "anchor": "tokenreply",
+   "type": "replenishable",
+   "description": "TokenReply is a lightweight inference hub offering models from Google, DeepSeek, OpenAI, Qwen, Moonshot, Stepfun, Zhipu, and more through an OpenAI-compatible endpoint. The free tier provides 3 RPM for its free models, but given its latencies, it's more of a tight cap suited for general conversations and light coding. TokenReply currently has 24 models verified.",
+   "quota": "3 RPM / Free Models Only",
+   "base_url": "https://api.tokenreply.com/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "partial",
+    "error_handling": "yes",
+    "rate_limit_safe": "partial"
+   },
+   "models": [
+    {
+     "id": "dots-3-note-preview",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.85s",
+     "latency_s": 1.85
+    },
+    {
+     "id": "google/diffusiongemma-26b-a4b-it",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~0.82s",
+     "latency_s": 0.82
+    },
+    {
+     "id": "grok-4.20-fast",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~8.25s",
+     "latency_s": 8.25
+    },
+    {
+     "id": "laguna-s-2.1",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Code",
+     "latency": "~2.09s",
+     "latency_s": 2.09
+    },
+    {
+     "id": "laguna-xs-2.1",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~0.99s",
+     "latency_s": 0.99
+    },
+    {
+     "id": "lfm-2.5-2.6b",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.13s",
+     "latency_s": 1.13
+    },
+    {
+     "id": "meta/llama-3.2-11b-vision-instruct",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~0.78s",
+     "latency_s": 0.78
+    },
+    {
+     "id": "meta/llama-3.2-90b-vision-instruct",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~16.18s",
+     "latency_s": 16.18
+    },
+    {
+     "id": "meta/muse-glimmer-30b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~1.23s",
+     "latency_s": 1.23
+    },
+    {
+     "id": "mimo-v2.6-flash-thinking-free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~27.79s",
+     "latency_s": 27.79
+    },
+    {
+     "id": "moonshotai/kimi-k3",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~3.61s",
+     "latency_s": 3.61
+    },
+    {
+     "id": "nemotron-3-nano-omni-30b-a3b-reasoning",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~1.09s",
+     "latency_s": 1.09
+    },
+    {
+     "id": "nemotron-3-ultra-free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~6.19s",
+     "latency_s": 6.19
+    },
+    {
+     "id": "nemotron-3-ultra-thinking-free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~6.7s",
+     "latency_s": 6.7
+    },
+    {
+     "id": "nemotron-3.5-lightning-free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~1.07s",
+     "latency_s": 1.07
+    },
+    {
+     "id": "nemotron-3.5-lightning-thinking-free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "Reasoning",
+     "latency": "~17.35s",
+     "latency_s": 17.35
+    },
+    {
+     "id": "north-mini-code",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~1.19s",
+     "latency_s": 1.19
+    },
+    {
+     "id": "nvidia/ising-calibration-1.5-31b",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~13.46s",
+     "latency_s": 13.46
+    },
+    {
+     "id": "nvidia/nemotron-3-super-120b-a12b",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~1.08s",
+     "latency_s": 1.08
+    },
+    {
+     "id": "nvidia/nemotron-3-ultra-550b-a55b",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.07s",
+     "latency_s": 1.07
+    },
+    {
+     "id": "nvidia/nemotron-3.5-lightning-30b-a3b",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~23.51s",
+     "latency_s": 23.51
+    },
+    {
+     "id": "openai/gpt-oss-20b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~0.86s",
+     "latency_s": 0.86
+    },
+    {
+     "id": "z-ai/glm-5.3",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~17.71s",
+     "latency_s": 17.71
+    },
+    {
+     "id": "z-ai/glm-5.3-flash",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~16.18s",
+     "latency_s": 16.18
+    }
+   ]
+  },
+  {
+   "name": "Void AI",
+   "url": "https://voidai.app",
+   "anchor": "void-ai",
+   "type": "replenishable",
+   "description": "Void AI is an inference hub offering models from OpenAI, Google, DeepSeek, Qwen, Moonshot, Zhipu, and more through an OpenAI-compatible endpoint. The free tier provides 100 RPM with 125,000 daily credits -- Sustained for light coding. Void AI currently has 48 verified coding-relevant models.",
+   "quota": "100 RPM / 125,000 Daily Credits",
+   "base_url": "https://api.voidai.app/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "deepseek-v3.2",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~2.0s",
+     "latency_s": 2.0
+    },
+    {
+     "id": "deepseek-v4-flash",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "deepseek-v4-flash-0731",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "deepseek-v4-pro",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    },
+    {
+     "id": "deepseek-v4-pro-0813",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    },
+    {
+     "id": "gemini-2.5-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "gemini-3-flash-preview",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "gemini-3.1-flash-lite",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "gemini-3.5-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Code",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gemini-3.5-flash-lite",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "gemini-3.6-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Code",
+     "latency": "~1.8s",
+     "latency_s": 1.8
+    },
+    {
+     "id": "gemini-3.7-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gemini-3.8-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.8s",
+     "latency_s": 1.8
+    },
+    {
+     "id": "gemma-4-31b-it",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~1.45s",
+     "latency_s": 1.45
+    },
+    {
+     "id": "glm-5.1",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.0s",
+     "latency_s": 2.0
+    },
+    {
+     "id": "glm-5.2",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.2s",
+     "latency_s": 2.2
+    },
+    {
+     "id": "glm-5.3",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.0s",
+     "latency_s": 2.0
+    },
+    {
+     "id": "glm-5.3-flash",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "gpt-4.1",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-4.1-mini",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-4o",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-4o-mini",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-5",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-5-mini",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-5-nano",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~5.61s",
+     "latency_s": 5.61
+    },
+    {
+     "id": "gpt-5.1",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-5.2",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-5.4",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-5.4-mini",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~5.61s",
+     "latency_s": 5.61
+    },
+    {
+     "id": "gpt-5.4-nano",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~5.61s",
+     "latency_s": 5.61
+    },
+    {
+     "id": "gpt-5.5",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-5.6-luna",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-5.6-sol",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-5.6-terra",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-oss-120b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "gpt-oss-20b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Code",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "kimi-k2.5",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~1.0s",
+     "latency_s": 1.0
+    },
+    {
+     "id": "kimi-k2.6",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~0.8s",
+     "latency_s": 0.8
+    },
+    {
+     "id": "kimi-k2.7-code",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "kimi-k3",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "qwen3-235b-a22b-instruct",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "qwen3-coder-480b-a35b-instruct",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Code",
+     "latency": "~3.0s",
+     "latency_s": 3.0
+    },
+    {
+     "id": "qwen3.8-2.4t-a95b",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "Reasoning",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "qwen3.8-27b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~8.31s",
+     "latency_s": 8.31
+    },
+    {
+     "id": "sonar",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "sonar-deep-research",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "sonar-pro",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "sonar-reasoning-pro",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "Reasoning",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    }
+   ]
+  },
+  {
+   "name": "xKiro AI",
+   "url": "https://xkiro.com",
+   "anchor": "xkiro-ai",
+   "type": "replenishable",
+   "description": "xKiro AI is an API gateway offering free models from DeepSeek, Qwen, Mistral, MiniMax and more via an OpenAI-compatible API. The free tier offers 5M TPD for free models. xKiro AI currently has 44 models verified.",
+   "quota": "5M TPD / Free models only",
+   "base_url": "https://api.xkiro.com/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "mistralai/ministral-14b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.2s",
+     "latency_s": 1.2
+    },
+    {
+     "id": "qwen/qwen3-vl-plus:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~3.19s",
+     "latency_s": 3.19
+    },
+    {
+     "id": "cohere/north-mini-code",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~0.79s",
+     "latency_s": 0.79
+    },
+    {
+     "id": "cohere/command-r-08-2024",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.84s",
+     "latency_s": 0.84
+    },
+    {
+     "id": "qwen/qwen-plus-2025-07-28:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.73s",
+     "latency_s": 2.73
+    },
+    {
+     "id": "sensenova/sensenova-6.8-flash-lite",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.94s",
+     "latency_s": 0.94
+    },
+    {
+     "id": "cohere/command-a",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~2.63s",
+     "latency_s": 2.63
+    },
+    {
+     "id": "cohere/aya-vision-32b",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Vision",
+     "latency": "~0.79s",
+     "latency_s": 0.79
+    },
+    {
+     "id": "cohere/aya-expanse-32b",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~0.86s",
+     "latency_s": 0.86
+    },
+    {
+     "id": "mistralai/ministral-3b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.76s",
+     "latency_s": 1.76
+    },
+    {
+     "id": "cohere/tiny-aya-earth",
+     "aliases": [],
+     "context": "8K",
+     "context_tokens": 8000,
+     "best_for": "Translation",
+     "latency": "~0.76s",
+     "latency_s": 0.76
+    },
+    {
+     "id": "cohere/tiny-aya-global",
+     "aliases": [],
+     "context": "8K",
+     "context_tokens": 8000,
+     "best_for": "Translation",
+     "latency": "~0.86s",
+     "latency_s": 0.86
+    },
+    {
+     "id": "cohere/command-r-plus-08-2024",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.94s",
+     "latency_s": 0.94
+    },
+    {
+     "id": "cohere/tiny-aya-fire",
+     "aliases": [],
+     "context": "8K",
+     "context_tokens": 8000,
+     "best_for": "Translation",
+     "latency": "~0.69s",
+     "latency_s": 0.69
+    },
+    {
+     "id": "cohere/command-a-plus",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~0.77s",
+     "latency_s": 0.77
+    },
+    {
+     "id": "mistralai/mistral-large-2512",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "Reasoning",
+     "latency": "~0.85s",
+     "latency_s": 0.85
+    },
+    {
+     "id": "mistralai/mistral-medium-3.5",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~0.76s",
+     "latency_s": 0.76
+    },
+    {
+     "id": "mistralai/mistral-small-2603",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.07s",
+     "latency_s": 1.07
+    },
+    {
+     "id": "mistralai/devstral-medium",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~0.69s",
+     "latency_s": 0.69
+    },
+    {
+     "id": "mistralai/codestral-2508",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Code",
+     "latency": "~1.25s",
+     "latency_s": 1.25
+    },
+    {
+     "id": "cohere/command-a-translate",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Translation",
+     "latency": "~0.86s",
+     "latency_s": 0.86
+    },
+    {
+     "id": "qwen/qwen3-omni-flash:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~2.6s",
+     "latency_s": 2.6
+    },
+    {
+     "id": "mistralai/ministral-8b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.14s",
+     "latency_s": 1.14
+    },
+    {
+     "id": "qwen/qwen3.6-plus:free",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~2.94s",
+     "latency_s": 2.94
+    },
+    {
+     "id": "qwen/qwen3.7-max:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~3.12s",
+     "latency_s": 3.12
+    },
+    {
+     "id": "qwen/qwen3.7-plus:free",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~2.95s",
+     "latency_s": 2.95
+    },
+    {
+     "id": "qwen/qwen3.5-omni-flash:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~2.89s",
+     "latency_s": 2.89
+    },
+    {
+     "id": "cohere/command-r7b-12-2024",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~0.76s",
+     "latency_s": 0.76
+    },
+    {
+     "id": "qwen/qwen3.8-max:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~3.22s",
+     "latency_s": 3.22
+    },
+    {
+     "id": "qwen/qwen3.8-omni-flash:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~4.37s",
+     "latency_s": 4.37
+    },
+    {
+     "id": "qwen/qwen3.7-flash:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~3.32s",
+     "latency_s": 3.32
+    },
+    {
+     "id": "qwen/qwen3.6-max-preview:free",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~2.88s",
+     "latency_s": 2.88
+    },
+    {
+     "id": "qwen/qwen3-coder-plus:free",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Code",
+     "latency": "~3.42s",
+     "latency_s": 3.42
+    },
+    {
+     "id": "cohere/north-small-translate",
+     "aliases": [],
+     "context": "8K",
+     "context_tokens": 8000,
+     "best_for": "Translation",
+     "latency": "~0.76s",
+     "latency_s": 0.76
+    },
+    {
+     "id": "qwen/qwen3.6-27b:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.5s",
+     "latency_s": 2.5
+    },
+    {
+     "id": "qwen/qwen3.5-plus:free",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~4.45s",
+     "latency_s": 4.45
+    },
+    {
+     "id": "cohere/command-a-vision",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Vision",
+     "latency": "~0.75s",
+     "latency_s": 0.75
+    },
+    {
+     "id": "cohere/command-a-reasoning",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~0.88s",
+     "latency_s": 0.88
+    },
+    {
+     "id": "qwen/qwen3.5-omni-plus:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~3.01s",
+     "latency_s": 3.01
+    },
+    {
+     "id": "qwen/qwen3.6-35b-a3b:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~3.01s",
+     "latency_s": 3.01
+    },
+    {
+     "id": "qwen/qwen3.5-flash:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~4.46s",
+     "latency_s": 4.46
+    },
+    {
+     "id": "cohere/tiny-aya-water",
+     "aliases": [],
+     "context": "8K",
+     "context_tokens": 8000,
+     "best_for": "Translation",
+     "latency": "~0.76s",
+     "latency_s": 0.76
+    },
+    {
+     "id": "qwen/qwen3.5-397b-a17b:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~4.24s",
+     "latency_s": 4.24
+    },
+    {
+     "id": "qwen/qwen3-max:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~2.71s",
+     "latency_s": 2.71
+    }
+   ]
+  },
+  {
+   "name": "Yolo-Auto",
+   "url": "https://yolo-auto.com",
+   "anchor": "yolo-auto",
+   "type": "replenishable",
+   "description": "Yolo-Auto is a bare-metal inference provider running a single Qwen model through an OpenAI-compatible endpoint. The free tier offers 15 requests per week for integration testing -- tight enough to verify your tooling works before upgrading to the flat-rate unlimited plan. As they promised, more models are coming soon. Yolo-Auto currently has 2 models verified.",
+   "quota": "15 Requests per Week",
+   "base_url": "https://yolo-auto.com/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "partial"
+   },
+   "models": [
+    {
+     "id": "qwen3.8-27b",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~4.69s",
+     "latency_s": 4.69
+    },
+    {
+     "id": "qwen3.8-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~3.16s",
+     "latency_s": 3.16
+    }
+   ]
+  },
+  {
+   "name": "Zhipu AI",
+   "url": "https://z.ai",
+   "anchor": "zhipu-ai",
+   "type": "replenishable",
+   "description": "Zhipu AI is a Chinese AI company developing the GLM family of foundation models. The free tier offers two flash-variant models with a concurrency limit of 1 request at a time and unlimited daily tokens -- practical for lightweight scripting and quick edits, but the single-concurrent cap makes sustained coding sessions impractical. Zhipu AI currently has 2 models verified.",
+   "quota": "1 Concurrent Request / Uncapped TPD",
+   "base_url": "https://api.z.ai/api/paas/v4",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "glm-4.7-flash",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.4s",
+     "latency_s": 2.4
+    },
+    {
+     "id": "glm-4.5-flash",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Fallback",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    }
+   ]
+  },
+  {
+   "name": "Zydit AI",
+   "url": "https://zydit.in",
+   "anchor": "zydit-ai",
+   "type": "replenishable",
+   "description": "Zydit AI is an API gateway offering free models via an OpenAI-compatible API. The free tier provides unlimited requests at 10 RPM for free models (v3 endpoints). Zydit AI currently has 3 models verified.",
+   "quota": "Unlimited Requests / 10 RPM / Free models only (For v3 endpoints)",
+   "base_url": "https://api.zydit.in/v3",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "deepseek-r1:latest",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~6.70s",
+     "latency_s": 6.7
+    },
+    {
+     "id": "dolphin3:latest",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~3.86s",
+     "latency_s": 3.86
+    },
+    {
+     "id": "gemma4-31b-it-pro",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~5.35s",
+     "latency_s": 5.35
+    }
+   ]
+  },
+  {
+   "name": "Zylo API",
+   "url": "https://zyloai.net",
+   "anchor": "zylo-api",
+   "type": "replenishable",
+   "description": "Zylo API is a unified inference hub providing access to models from DeepSeek, NVIDIA, Mistral, MiniMax, Qwen, GLM, and Google through an OpenAI-compatible endpoint. The free tier offers 10 RPM with 7,200 requests and 200,000 tokens per day -- which is sustained for light coding or general use cases. Zylo API currently has 6 models verified.",
+   "quota": "10 RPM / 7,200 RPD / 200,000 TPD",
+   "base_url": "https://api.zyloai.net/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "gemma-4",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~1.8s",
+     "latency_s": 1.8
+    },
+    {
+     "id": "gpt-oss-20b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Code",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    },
+    {
+     "id": "laguna-xs-2.1",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~1.9s",
+     "latency_s": 1.9
+    },
+    {
+     "id": "muse-glimmer-30b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "nemotron-3-ultra",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.1s",
+     "latency_s": 1.1
+    },
+    {
+     "id": "nemotron-3.5-lightning",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    }
+   ]
+  },
+  {
+   "name": "Agnes AI",
+   "url": "https://www.agnes-ai.com",
+   "anchor": "agnes-ai",
+   "type": "non-replenishable",
+   "description": "Agnes AI offers flash-tier and pro-tier models with generous daily limits and responsive sub-2s latencies. The free tier provides 1,000 requests per day at 20 RPM -- enough volume for background jobs and light interactive coding. Agnes AI currently has 2 models verified.",
+   "quota": "20 RPM / 1,000 RPD",
+   "base_url": "https://apihub.agnes-ai.com/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "partial"
+   },
+   "models": [
+    {
+     "id": "agnes-2.5-flash",
+     "aliases": [],
+     "context": "512K",
+     "context_tokens": 512000,
+     "best_for": "Fallback",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "agnes-3.0-flash",
+     "aliases": [],
+     "context": "512K",
+     "context_tokens": 512000,
+     "best_for": "General",
+     "latency": "~0.69s",
+     "latency_s": 0.69
+    }
+   ]
+  },
+  {
+   "name": "APIShare",
+   "url": "https://apishare.cc",
+   "anchor": "apishare",
+   "type": "non-replenishable",
+   "description": "APIShare is a community-driven API aggregator exposing free routes to open-weight models through an OpenAI-compatible endpoint, with contributed routes carrying vendor-prefixed model IDs. The free tier covers 8 community-shared models on a no-replenishment basis -- the cost never rises above $0 -- though per-model rate limits are undocumented and one route returned an empty completion in verification. APIShare currently has 8 models verified.",
+   "quota": "Free Models only",
+   "base_url": "https://apishare.cc/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "partial"
+   },
+   "models": [
+    {
+     "id": "ApiShare/zhipu/glm-5.2:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~3.80s",
+     "latency_s": 3.8
+    },
+    {
+     "id": "MeiLin/THUDM/GLM-Z1-9B-0414",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~7.03s",
+     "latency_s": 7.03
+    },
+    {
+     "id": "MeiLin/THUDM/GLM-4-9B-0414",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.40s",
+     "latency_s": 1.4
+    },
+    {
+     "id": "hilbert/XingChenAGI/Xing4.0-29B",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~0.60s",
+     "latency_s": 0.6
+    },
+    {
+     "id": "ApiShare/alibaba/qwen3.8-max:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~2.13s",
+     "latency_s": 2.13
+    },
+    {
+     "id": "JamesFoster/tencent/Hunyuan-MT-7B",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "Translation",
+     "latency": "~4.72s",
+     "latency_s": 4.72
+    },
+    {
+     "id": "Agnes/agnes-3.0-flash:free",
+     "aliases": [],
+     "context": "512K",
+     "context_tokens": 512000,
+     "best_for": "General",
+     "latency": "~1.46s",
+     "latency_s": 1.46
+    },
+    {
+     "id": "ApiShare/alibaba/qwen3.7-plus:free",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~3.96s",
+     "latency_s": 3.96
+    }
+   ]
+  },
+  {
+   "name": "Auriko",
+   "url": "https://www.auriko.ai",
+   "anchor": "auriko",
+   "type": "non-replenishable",
+   "description": "Auriko is a unified API gateway providing access to 100+ models from top providers through a single OpenAI-compatible endpoint. The free tier offers 1,000 Platform RPM and 500 BYOK RPM with a 1M token monthly cap -- but most models run on a credit system ($1 usage), not truly free. Only 3 models are genuinely free and replenishable without credits. Auriko currently has 3 models verified.",
+   "quota": "500 RPM (BYOK) / 1,000 RPM (Platform) / 1,000,000 tokens/month (BYOK) / Has Permanently Free models",
+   "base_url": "https://api.auriko.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "glm-4.5-flash",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~2.8s",
+     "latency_s": 2.8
+    },
+    {
+     "id": "glm-4.6v-flash",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~3.0s",
+     "latency_s": 3.0
+    },
+    {
+     "id": "glm-4.7-flash",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~2.8s",
+     "latency_s": 2.8
+    }
+   ]
+  },
+  {
+   "name": "BazaarLink",
+   "url": "https://bazaarlink.ai",
+   "anchor": "bazaarlink",
+   "type": "non-replenishable",
+   "description": "BazaarLink is a lightweight inference gateway offering free models via an OpenAI-compatible API using a :free suffix. The free tier provides 10 RPM with 50 requests per day. BazaarLink currently has 3 models verified.",
+   "quota": "10 RPM / 50 RPD / Free Models only",
+   "base_url": "https://api.bazaarlink.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "auto:free",
+     "aliases": [],
+     "context": "Varies",
+     "context_tokens": null,
+     "best_for": "General",
+     "latency": "~2.56s",
+     "latency_s": 2.56
+    },
+    {
+     "id": "deepseek/deepseek-v4-flash-0731free:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Reasoning",
+     "latency": "~2.0s",
+     "latency_s": 2.0
+    },
+    {
+     "id": "qwen/qwen3.7-flash:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~3.23s",
+     "latency_s": 3.23
+    }
+   ]
+  },
+  {
+   "name": "FastRouter",
+   "url": "https://fastrouter.ai",
+   "anchor": "fastrouter",
+   "type": "non-replenishable",
+   "description": "FastRouter is a lightweight inference hub offering models with a :free suffix through an OpenAI-compatible endpoint. The free tier provides 10 requests per day per model with no billing credits required -- a tight cap suited for occasional queries and model evaluation. FastRouter currently has 6 models verified.",
+   "quota": "10 RPD per model / No Billing Credits Required",
+   "base_url": "https://api.fastrouter.ai/api/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "google/gemma4-26b:free",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~0.97s",
+     "latency_s": 0.97
+    },
+    {
+     "id": "nvidia/nemotron-3-nano-30b:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.02s",
+     "latency_s": 1.02
+    },
+    {
+     "id": "nvidia/nemotron-3-super:free",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "General",
+     "latency": "~2.79s",
+     "latency_s": 2.79
+    },
+    {
+     "id": "openai/gpt-oss-120b:free",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "General",
+     "latency": "~0.92s",
+     "latency_s": 0.92
+    },
+    {
+     "id": "openai/gpt-oss-20b:free",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Code",
+     "latency": "~1.06s",
+     "latency_s": 1.06
+    },
+    {
+     "id": "sarvam/sarvam-105b:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.34s",
+     "latency_s": 1.34
+    }
+   ]
+  },
+  {
+   "name": "Odirouter",
+   "url": "https://odirouter.ai",
+   "anchor": "odirouter",
+   "type": "non-replenishable",
+   "description": "Odirouter is an API router in Russia, providing a pool of free-tier models from Anthropic, Google, Qwen, MiniMax, and OpenAI through an OpenAI-compatible endpoint. Models are exposed with a free- prefix -- which provides about 100 Requests/day. Odirouter currently has 12 models verified.",
+   "quota": "5 RPM / 50 RPD / Free Models Only / 2 Parallel Multimodal Queries",
+   "base_url": "https://api.odirouter.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "partial",
+    "rate_limit_safe": "partial"
+   },
+   "models": [
+    {
+     "id": "free-claude-haiku-4-5-20251001",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "Code",
+     "latency": "~2.46s",
+     "latency_s": 2.46
+    },
+    {
+     "id": "free-claude-haiku-4.5",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "Code",
+     "latency": "~2.21s",
+     "latency_s": 2.21
+    },
+    {
+     "id": "free-gemini-2.5-flash",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.8s",
+     "latency_s": 1.8
+    },
+    {
+     "id": "free-gemini-2.5-pro",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~4.4s",
+     "latency_s": 4.4
+    },
+    {
+     "id": "free-gemini-3-flash-preview",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~12.54s",
+     "latency_s": 12.54
+    },
+    {
+     "id": "free-gemini-3.1-flash-lite",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~6.83s",
+     "latency_s": 6.83
+    },
+    {
+     "id": "free-gpt-5.4-mini",
+     "aliases": [],
+     "context": "400K",
+     "context_tokens": 400000,
+     "best_for": "General",
+     "latency": "~1.71s",
+     "latency_s": 1.71
+    },
+    {
+     "id": "free-minimax-m2.5",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "Reasoning",
+     "latency": "~1.71s",
+     "latency_s": 1.71
+    },
+    {
+     "id": "free-minimax-m2.7",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "Reasoning",
+     "latency": "~4.0s",
+     "latency_s": 4.0
+    },
+    {
+     "id": "free-qwen3.5-flash",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~2.59s",
+     "latency_s": 2.59
+    },
+    {
+     "id": "free-qwen3.5-plus",
+     "aliases": [],
+     "context": "256K",
+     "context_tokens": 256000,
+     "best_for": "Reasoning",
+     "latency": "~2.07s",
+     "latency_s": 2.07
+    },
+    {
+     "id": "free-vclaude-haiku-4.5",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "Code",
+     "latency": "~7.6s",
+     "latency_s": 7.6
+    }
+   ]
+  },
+  {
+   "name": "OpenRouter",
+   "url": "https://openrouter.ai",
+   "anchor": "openrouter",
+   "type": "non-replenishable",
+   "description": "OpenRouter is a unified API gateway providing access to hundreds of models from dozens of providers through a single endpoint. The free tier offers rate-limited access to community-hosted models (marked with :free) that changes often. A great backup when other providers are rate-limited. OpenRouter currently has 10 models verified.",
+   "quota": "20 RPM / 50 RPD",
+   "base_url": "https://openrouter.ai/api/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "cohere/north-mini-code:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~2.1s",
+     "latency_s": 2.1
+    },
+    {
+     "id": "dots-studio/dots-3-note-preview:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.7s",
+     "latency_s": 1.7
+    },
+    {
+     "id": "liquid/lfm-2.5-2.6b:free",
+     "aliases": [],
+     "context": "65K",
+     "context_tokens": 65000,
+     "best_for": "General",
+     "latency": "~1.6s",
+     "latency_s": 1.6
+    },
+    {
+     "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~14.78s",
+     "latency_s": 14.78
+    },
+    {
+     "id": "nvidia/nemotron-3.5-lightning:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~0.7s",
+     "latency_s": 0.7
+    },
+    {
+     "id": "nvidia/nemotron-3.5-super-vl:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "Vision",
+     "latency": "~0.9s",
+     "latency_s": 0.9
+    },
+    {
+     "id": "poolside/laguna-s-2.1:free",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "Code",
+     "latency": "~1.3s",
+     "latency_s": 1.3
+    },
+    {
+     "id": "recursive/flint-v1.0:free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    },
+    {
+     "id": "xingchen-agi/xing4.0-29b-a4b:free",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~2.0s",
+     "latency_s": 2.0
+    }
+   ]
+  },
+  {
+   "name": "Requesty",
+   "url": "https://requesty.ai",
+   "anchor": "requesty",
+   "type": "non-replenishable",
+   "description": "Requesty is an API router providing access to free models via an OpenAI-compatible API. The free tier offers 200 RPD for free models. Requesty currently has 7 models verified.",
+   "quota": "200 RPD / Free Models only",
+   "base_url": "https://router.requesty.ai/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "novita/ling-3.1-flash",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~1.75s",
+     "latency_s": 1.75
+    },
+    {
+     "id": "nvidia/nemotron-3.5-lightning-30b-a3b",
+     "aliases": [],
+     "context": "262K",
+     "context_tokens": 262000,
+     "best_for": "General",
+     "latency": "~0.89s",
+     "latency_s": 0.89
+    },
+    {
+     "id": "nvidia/muse-glimmer-30b",
+     "aliases": [],
+     "context": "131K",
+     "context_tokens": 131000,
+     "best_for": "Reasoning",
+     "latency": "~1.09s",
+     "latency_s": 1.09
+    },
+    {
+     "id": "nvidia/nemotron-3-ultra-550b-a55b",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "General",
+     "latency": "~1.07s",
+     "latency_s": 1.07
+    },
+    {
+     "id": "mistral/leanstral-1-5",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Code",
+     "latency": "~1.48s",
+     "latency_s": 1.48
+    },
+    {
+     "id": "google/gemma-4-31b-it",
+     "aliases": [],
+     "context": "32K",
+     "context_tokens": 32000,
+     "best_for": "General",
+     "latency": "~1.99s",
+     "latency_s": 1.99
+    },
+    {
+     "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+     "aliases": [],
+     "context": "1M",
+     "context_tokens": 1000000,
+     "best_for": "Reasoning",
+     "latency": "~2.15s",
+     "latency_s": 2.15
+    }
+   ]
+  },
+  {
+   "name": "Tokeness",
+   "url": "https://tokeness.ai",
+   "anchor": "tokeness",
+   "type": "non-replenishable",
+   "description": "Tokeness is an auto-routing inference gateway serving a single free auto model via an OpenAI-compatible endpoint. Because it auto-routes, context windows vary per request. Tokeness currently has 1 model verified.",
+   "quota": "Unspecified Rate Limits / Free models only",
+   "base_url": "https://n.tokeness.dev/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "partial"
+   },
+   "models": [
+    {
+     "id": "tokeness/free",
+     "aliases": [],
+     "context": "Varies",
+     "context_tokens": null,
+     "best_for": "General",
+     "latency": "~5.94s",
+     "latency_s": 5.94
+    }
+   ]
+  },
+  {
+   "name": "VSLLM",
+   "url": "https://vsllm.cc",
+   "anchor": "vsllm",
+   "type": "non-replenishable",
+   "description": "VSLLM is a Chinese-based API gateway offering free GLM models via an OpenAI-compatible endpoint. The free tier provides access to free-tagged models only. VSLLM currently has 2 models verified.",
+   "quota": "Unspecified Rate Limits / Free Models only",
+   "base_url": "https://vsllm.cc/v1",
+   "base_url_note": "",
+   "verified": "October 24, 2026",
+   "capabilities": {
+    "tool_calls": "yes",
+    "schema": "yes",
+    "error_handling": "yes",
+    "rate_limit_safe": "yes"
+   },
+   "models": [
+    {
+     "id": "glm-4.6v-flash-free",
+     "aliases": [],
+     "context": "128K",
+     "context_tokens": 128000,
+     "best_for": "Vision",
+     "latency": "~2.33s",
+     "latency_s": 2.33
+    },
+    {
+     "id": "glm-4.7-flash-free",
+     "aliases": [],
+     "context": "200K",
+     "context_tokens": 200000,
+     "best_for": "General",
+     "latency": "~1.5s",
+     "latency_s": 1.5
+    }
+   ]
+  }
+ ]
+}

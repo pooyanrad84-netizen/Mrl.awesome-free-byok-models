@@ -26,6 +26,8 @@ By using a **Bring Your Own Key (BYOK)** approach, you can plug your free API ke
 
 **Data sources:** Quota, context size, and latency figures are drawn from provider documentation and live API verification via `scripts/verify.py`[^1]. Latency is measured from request to first token under typical network conditions and will vary. Providers are marked with a verification date showing when their free tier was last confirmed working.
 
+**Search it:** The [Free BYOK Model Finder](https://pooyanrad84-netizen.github.io/Mrl.awesome-free-byok-models/) puts every model below in one searchable table -- filter by use case, context size, latency, and free-tier type, and copy model IDs and base URLs in one click.
+
 **Use responsibly.** This list is for developers -- not for scraping, reselling, or bulk harvesting. Respect each provider's rate limits and terms of service.
 
 ## Contents
