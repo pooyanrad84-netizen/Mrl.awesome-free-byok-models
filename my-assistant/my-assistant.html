@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My AI Assistant</title>
+
+<!--
+  ================================================================
+  YOUR AI ASSISTANT
+  ================================================================
+  This whole app is this one file. A web page has three parts:
+
+    1. HTML  (the <body> below)   -> WHAT is on the page: boxes, buttons, text
+    2. CSS   (the <style> part)   -> HOW it looks: colours, sizes, spacing
+    3. JS    (the <script> part)  -> WHAT it does: sends your message to the AI
+
+  To change things, look for lines marked  "CHANGE ME"  and edit them
+  in a text editor, save, then refresh the page in your browser.
+  ================================================================
+-->
+
+<style>
+  /* ----- Colours. CHANGE ME: try other colours, e.g. "#e4572e" or "teal" ----- */
+  :root {
+    --main-colour: #3b5bdb;      /* buttons and your message bubbles */
+    --background: #f4f5f9;       /* the page behind everything */
+    --card: #ffffff;             /* the AI's message bubbles */
+    --text: #1d2130;
+    --soft-text: #6b7187;
+    --border: #dfe2ec;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--background);
+    color: var(--text);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  header h1 { font-size: 18px; margin: 0; }
+  header small { color: var(--soft-text); }
+  .link-button {
+    background: none; border: 0; color: var(--soft-text);
+    cursor: pointer; font: inherit; font-size: 14px; text-decoration: underline;
+  }
+
+  /* The scrolling area that holds the conversation */
+  #chat {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 760px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .bubble {
+    padding: 10px 14px;
+    border-radius: 14px;
+    max-width: 85%;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .bubble.you { align-self: flex-end; background: var(--main-colour); color: white; }
+  .bubble.ai  { align-self: flex-start; background: var(--card); border: 1px solid var(--border); }
+  .bubble.error { align-self: center; background: #fff1f0; color: #a8071a; border: 1px solid #ffccc7; }
+  .bubble pre { background: #f0f1f5; color: #1d2130; padding: 10px; border-radius: 8px; overflow-x: auto; white-space: pre; }
+  .bubble code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14px; }
+  .thinking { color: var(--soft-text); font-style: italic; }
+
+  /* The box at the bottom where you type */
+  form {
+    display: flex;
+    gap: 8px;
+    padding: 14px 20px 20px;
+    max-width: 760px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  textarea {
+    flex: 1;
+    resize: none;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    font: inherit;
+    min-height: 48px;
+    max-height: 160px;
+  }
+  button.send {
+    background: var(--main-colour);
+    color: white;
+    border: 0;
+    border-radius: 12px;
+    padding: 0 20px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button.send:disabled { opacity: .5; cursor: wait; }
+
+  /* The "paste your key" screen shown the first time */
+  #key-screen {
+    max-width: 480px;
+    margin: 60px auto;
+    padding: 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    display: grid;
+    gap: 12px;
+  }
+  #key-screen h2 { margin: 0; }
+  #key-screen p { margin: 0; color: var(--soft-text); }
+  #key-screen input { padding: 12px; border-radius: 10px; border: 1px solid var(--border); font: inherit; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <!-- CHANGE ME: the name shown at the top of the page -->
+      <h1 id="title">My AI Assistant</h1>
+      <small id="model-label"></small>
+    </div>
+    <button class="link-button" id="forget-key" hidden>Remove my key</button>
+  </header>
+
+  <!-- Screen 1: shown until you paste your key -->
+  <section id="key-screen">
+    <h2>Paste your Google AI key</h2>
+    <p>It starts with <b>AIza</b>. It's saved only in this browser on this computer and sent only to Google.</p>
+    <input id="key-input" type="password" placeholder="AIza..." autocomplete="off">
+    <button class="send" id="save-key" style="padding:12px">Start chatting</button>
+  </section>
+
+  <!-- Screen 2: the chat -->
+  <main id="chat" hidden></main>
+  <form id="message-form" hidden>
+    <textarea id="message" placeholder="Type a message and press Enter…" rows="1"></textarea>
+    <button class="send" id="send-button" type="submit">Send</button>
+  </form>
+
+<script>
+  // ================================================================
+  // SETTINGS -- the easiest things to change
+  // ================================================================
+
+  // CHANGE ME: the assistant's personality. Describe how it should behave,
+  // in plain English, as if you were briefing a new helper.
+  const PERSONALITY = `You are a friendly, patient assistant.
+Explain things simply, like you're talking to a smart friend who is new to the topic.
+Keep answers short unless asked for more detail.`;
+
+  // Which Google AI model to use. These come from the Google Gemini section
+  // of your awesome-free-byok-models list. If the first one is busy or out of
+  // free requests, the app automatically tries the next one.
+  const MODELS = ["gemini-flash-latest", "gemini-flash-lite-latest"];
+
+  // The first message the assistant shows. CHANGE ME if you like.
+  const WELCOME = "Hi! I'm your AI assistant. Ask me anything.";
+
+  // ================================================================
+  // HOW IT WORKS -- you don't need to change anything below to use it
+  // ================================================================
+
+  const chatBox = document.getElementById("chat");
+  const form = document.getElementById("message-form");
+  const messageBox = document.getElementById("message");
+  const sendButton = document.getElementById("send-button");
+
+  // The conversation so far. The AI has no memory of its own, so every time
+  // we send the WHOLE conversation, so it knows what was said before.
+  const history = [];
+
+  // ---- Your key: saved in this browser only ----
+  function getKey() {
+    try { return localStorage.getItem("google-ai-key") || ""; } catch (e) { return ""; }
+  }
+  function saveKey(key) {
+    try { localStorage.setItem("google-ai-key", key); } catch (e) { /* private window: key lasts until you close the tab */ }
+    window.currentKey = key;
+  }
+
+  function showChat() {
+    document.getElementById("key-screen").hidden = true;
+    chatBox.hidden = false;
+    form.hidden = false;
+    document.getElementById("forget-key").hidden = false;
+    document.getElementById("model-label").textContent = "Powered by Google " + MODELS[0];
+    if (chatBox.children.length === 0) addBubble("ai", WELCOME);
+    messageBox.focus();
+  }
+
+  document.getElementById("save-key").addEventListener("click", () => {
+    const key = document.getElementById("key-input").value.trim();
+    if (!key.startsWith("AIza")) {
+      alert("That doesn't look like a Google AI key. It should start with AIza.");
+      return;
+    }
+    saveKey(key);
+    showChat();
+  });
+
+  document.getElementById("forget-key").addEventListener("click", () => {
+    try { localStorage.removeItem("google-ai-key"); } catch (e) {}
+    window.currentKey = "";
+    location.reload();
+  });
+
+  // ---- Showing messages on the page ----
+  function addBubble(who, text) {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble " + who;
+    if (who === "ai") bubble.innerHTML = simpleFormat(text);
+    else bubble.textContent = text;
+    chatBox.appendChild(bubble);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    return bubble;
+  }
+
+  // The AI writes in "Markdown" (e.g. **bold**, `code`). This turns the
+  // most common bits into nicely formatted text.
+  function simpleFormat(text) {
+    const safe = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return safe
+      .replace(/```[a-z]*\n?([\s\S]*?)```/g, "<pre><code>$1</code></pre>")
+      .replace(/`([^`\n]+)`/g, "<code>$1</code>")
+      .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
+  }
+
+  // ---- Talking to the AI ----
+  async function askAI(modelName) {
+    const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/" + modelName + ":generateContent",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": window.currentKey || getKey(),   // your key proves who is asking
+        },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: PERSONALITY }] },
+          contents: history,
+        }),
+      }
+    );
+    const data = await response.json();
+    if (!response.ok) {
+      const error = new Error(data.error ? data.error.message : "Something went wrong.");
+      error.status = response.status;
+      throw error;
+    }
+    const parts = data.candidates?.[0]?.content?.parts || [];
+    return parts.map((p) => p.text || "").join("") || "(The AI sent an empty reply. Try asking again.)";
+  }
+
+  // Try each model in the MODELS list until one answers.
+  async function askWithBackup() {
+    let lastError;
+    for (const model of MODELS) {
+      try {
+        return await askAI(model);
+      } catch (error) {
+        lastError = error;
+        // 429 = out of free requests for now, 503 = too busy. Try the next model.
+        if (error.status !== 429 && error.status !== 503) break;
+      }
+    }
+    throw lastError;
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();               // stop the page from reloading
+    const text = messageBox.value.trim();
+    if (!text) return;
+
+    addBubble("you", text);
+    history.push({ role: "user", parts: [{ text }] });
+    messageBox.value = "";
+    sendButton.disabled = true;
+
+    const thinking = addBubble("ai", "Thinking…");
+    thinking.classList.add("thinking");
+
+    try {
+      const reply = await askWithBackup();
+      thinking.remove();
+      addBubble("ai", reply);
+      history.push({ role: "model", parts: [{ text: reply }] });
+    } catch (error) {
+      thinking.remove();
+      history.pop();                      // forget the message that failed, so you can resend it
+      let help = error.message;
+      if (error.status === 400 || error.status === 403) help = "Google didn't accept your key. Click \"Remove my key\" at the top and paste it again. (" + error.message + ")";
+      if (error.status === 429) help = "You've used your free requests for now. Wait a minute and try again.";
+      if (error instanceof TypeError) help = "Couldn't reach Google. Check your internet connection.";
+      addBubble("error", help);
+      messageBox.value = text;            // put your message back in the box
+    } finally {
+      sendButton.disabled = false;
+      messageBox.focus();
+    }
+  });
+
+  // Press Enter to send, Shift+Enter for a new line.
+  messageBox.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      form.requestSubmit();
+    }
+  });
+
+  // When the page opens: if a key is already saved, go straight to the chat.
+  if (getKey()) showChat();
+</script>
+</body>
+</html>
