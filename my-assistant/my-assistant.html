@@ -146,8 +146,8 @@
   <!-- Screen 1: shown until you paste your key -->
   <section id="key-screen">
     <h2>Paste your Google AI key</h2>
-    <p>It starts with <b>AIza</b>. It's saved only in this browser on this computer and sent only to Google.</p>
-    <input id="key-input" type="password" placeholder="AIza..." autocomplete="off">
+    <p>Copy it from Google AI Studio (it often starts with <b>AIza</b>). It's saved only in this browser on this computer and sent only to Google.</p>
+    <input id="key-input" type="password" placeholder="Paste your key here" autocomplete="off">
     <button class="send" id="save-key" style="padding:12px">Start chatting</button>
   </section>
 
@@ -210,11 +210,13 @@ Keep answers short unless asked for more detail.`;
   }
 
   document.getElementById("save-key").addEventListener("click", () => {
-    const key = document.getElementById("key-input").value.trim();
-    if (!key.startsWith("AIza")) {
-      alert("That doesn't look like a Google AI key. It should start with AIza.");
+    // Clean up anything copied by accident: spaces, line breaks, quote marks.
+    const key = document.getElementById("key-input").value.replace(/[\s"'`]/g, "");
+    if (key.length < 20) {
+      alert("That looks too short to be a key. Copy the whole key from Google AI Studio and paste it again.");
       return;
     }
+    // Google checks whether the key is real when you send your first message.
     saveKey(key);
     showChat();
   });
