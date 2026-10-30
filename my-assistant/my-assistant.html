@@ -130,6 +130,7 @@
     animation: pulse 1.2s ease-in-out infinite;
   }
   @keyframes pulse { 50% { opacity: .6; } }
+  button.mic.language { font-size: 15px; font-weight: 600; color: var(--main-colour); }
 
   /* The "paste your key" screen shown the first time */
   #key-screen {
@@ -170,7 +171,8 @@
   <!-- Screen 2: the chat -->
   <main id="chat" hidden></main>
   <form id="message-form" hidden>
-    <textarea id="message" placeholder="Type a message, or click 🎤 and talk…" rows="1"></textarea>
+    <textarea id="message" dir="auto" placeholder="Type a message, or click 🎤 and talk…" rows="1"></textarea>
+    <button class="mic language" id="language-button" type="button" title="Which language you'll speak. Click to switch."></button>
     <button class="mic" id="mic-button" type="button" title="Click and talk">🎤</button>
     <button class="send" id="send-button" type="submit">Send</button>
   </form>
@@ -184,7 +186,8 @@
   // in plain English, as if you were briefing a new helper.
   const PERSONALITY = `You are a friendly, patient assistant.
 Explain things simply, like you're talking to a smart friend who is new to the topic.
-Keep answers short unless asked for more detail.`;
+Keep answers short unless asked for more detail.
+Always reply in the same language the user writes in (for example English or Persian/Farsi).`;
 
   // Which Google AI model to use. These come from the Google Gemini section
   // of your awesome-free-byok-models list. If the first one is busy or out of
@@ -195,9 +198,13 @@ Keep answers short unless asked for more detail.`;
   // If the AI sends nothing for this many seconds, give up so the page never freezes.
   const TIMEOUT_SECONDS = 30;
 
-  // CHANGE ME: the language you speak into the microphone.
-  // Examples: "en-US" (English), "fa-IR" (Persian), "es-ES" (Spanish), "de-DE" (German).
-  const VOICE_LANGUAGE = "en-US";
+  // The languages you can speak into the microphone. The language button next
+  // to 🎤 switches between them. CHANGE ME to add more, e.g.
+  // { code: "es-ES", label: "ES" } for Spanish or { code: "de-DE", label: "DE" } for German.
+  const VOICE_LANGUAGES = [
+    { code: "en-US", label: "EN" },
+    { code: "fa-IR", label: "فا" },
+  ];
 
   // true = send your message as soon as you stop talking.
   // false = put what you said in the box so you can check it, then press Send yourself.
@@ -260,6 +267,7 @@ Keep answers short unless asked for more detail.`;
   function addBubble(who, text) {
     const bubble = document.createElement("div");
     bubble.className = "bubble " + who;
+    bubble.dir = "auto";                  // Farsi reads right-to-left, English left-to-right
     if (who === "ai") bubble.innerHTML = simpleFormat(text);
     else bubble.textContent = text;
     chatBox.appendChild(bubble);
@@ -428,6 +436,21 @@ Keep answers short unless asked for more detail.`;
   const SpeechToText = window.SpeechRecognition || window.webkitSpeechRecognition;
   let listener = null;
 
+  // The language button: click to switch which language the microphone listens for.
+  // Your choice is remembered in this browser.
+  const languageButton = document.getElementById("language-button");
+  let languageIndex = 0;
+  try { languageIndex = Math.max(0, VOICE_LANGUAGES.findIndex((l) => l.code === localStorage.getItem("voice-language"))); } catch (e) {}
+  function showLanguage() {
+    languageButton.textContent = VOICE_LANGUAGES[languageIndex].label;
+  }
+  languageButton.addEventListener("click", () => {
+    languageIndex = (languageIndex + 1) % VOICE_LANGUAGES.length;
+    try { localStorage.setItem("voice-language", VOICE_LANGUAGES[languageIndex].code); } catch (e) {}
+    showLanguage();
+  });
+  showLanguage();
+
   micButton.addEventListener("click", () => {
     if (!SpeechToText) {
       addBubble("error", "This browser can't listen to your voice. Open Rad Solutions AI in Google Chrome or Safari instead.");
@@ -439,7 +462,7 @@ Keep answers short unless asked for more detail.`;
     }
 
     listener = new SpeechToText();
-    listener.lang = VOICE_LANGUAGE;
+    listener.lang = VOICE_LANGUAGES[languageIndex].code;
     listener.interimResults = true;       // show words while you're still talking
     const typedBefore = messageBox.value ? messageBox.value + " " : "";
     let heard = "";
