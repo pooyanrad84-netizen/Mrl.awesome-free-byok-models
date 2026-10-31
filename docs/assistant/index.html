@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rad Solutions AI</title>
+
+<!--
+  ================================================================
+  YOUR AI ASSISTANT
+  ================================================================
+  This whole app is this one file. A web page has three parts:
+
+    1. HTML  (the <body> below)   -> WHAT is on the page: boxes, buttons, text
+    2. CSS   (the <style> part)   -> HOW it looks: colours, sizes, spacing
+    3. JS    (the <script> part)  -> WHAT it does: sends your message to the AI
+
+  To change things, look for lines marked  "CHANGE ME"  and edit them
+  in a text editor, save, then refresh the page in your browser.
+  ================================================================
+-->
+
+<style>
+  /* ----- Colours. CHANGE ME: try other colours, e.g. "#e4572e" or "teal" ----- */
+  :root {
+    --main-colour: #3b5bdb;      /* buttons and your message bubbles */
+    --background: #f4f5f9;       /* the page behind everything */
+    --card: #ffffff;             /* the AI's message bubbles */
+    --text: #1d2130;
+    --soft-text: #6b7187;
+    --border: #dfe2ec;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--background);
+    color: var(--text);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  header h1 { font-size: 18px; margin: 0; }
+  header small { color: var(--soft-text); }
+  .link-button {
+    background: none; border: 0; color: var(--soft-text);
+    cursor: pointer; font: inherit; font-size: 14px; text-decoration: underline;
+  }
+
+  /* The scrolling area that holds the conversation */
+  #chat {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 760px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .bubble {
+    padding: 10px 14px;
+    border-radius: 14px;
+    max-width: 85%;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .bubble.you { align-self: flex-end; background: var(--main-colour); color: white; }
+  .bubble.ai  { align-self: flex-start; background: var(--card); border: 1px solid var(--border); }
+  .bubble.error { align-self: center; background: #fff1f0; color: #a8071a; border: 1px solid #ffccc7; }
+  .bubble pre { background: #f0f1f5; color: #1d2130; padding: 10px; border-radius: 8px; overflow-x: auto; white-space: pre; }
+  .bubble code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14px; }
+  .thinking { color: var(--soft-text); font-style: italic; }
+
+  /* The box at the bottom where you type */
+  form {
+    display: flex;
+    gap: 8px;
+    padding: 14px 20px 20px;
+    max-width: 760px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  textarea {
+    flex: 1;
+    resize: none;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    font: inherit;
+    min-height: 48px;
+    max-height: 160px;
+  }
+  button.send {
+    background: var(--main-colour);
+    color: white;
+    border: 0;
+    border-radius: 12px;
+    padding: 0 20px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button.send:disabled { opacity: .5; cursor: wait; }
+
+  /* The microphone button. It turns red and pulses while recording. */
+  button.mic {
+    width: 48px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: 12px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  button.mic.listening {
+    background: #e03131;
+    border-color: #e03131;
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes pulse { 50% { opacity: .6; } }
+  button.mic:disabled { opacity: .5; cursor: wait; }
+
+  /* The "paste your key" screen shown the first time */
+  #key-screen {
+    max-width: 480px;
+    margin: 60px auto;
+    padding: 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    display: grid;
+    gap: 12px;
+  }
+  #key-screen h2 { margin: 0; }
+  #key-screen p { margin: 0; color: var(--soft-text); }
+  #key-screen input { padding: 12px; border-radius: 10px; border: 1px solid var(--border); font: inherit; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <!-- CHANGE ME: the name shown at the top of the page -->
+      <h1 id="title">Rad Solutions AI</h1>
+      <small id="model-label"></small>
+    </div>
+    <button class="link-button" id="forget-key" hidden>Remove my key</button>
+  </header>
+
+  <!-- Screen 1: shown until you paste your key -->
+  <section id="key-screen">
+    <h2>Paste your Google AI key</h2>
+    <p>Copy it from Google AI Studio (it often starts with <b>AIza</b>). It's saved only in this browser on this computer and sent only to Google.</p>
+    <input id="key-input" type="password" placeholder="Paste your key here" autocomplete="off">
+    <button class="send" id="save-key" style="padding:12px">Start chatting</button>
+  </section>
+
+  <!-- Screen 2: the chat -->
+  <main id="chat" hidden></main>
+  <form id="message-form" hidden>
+    <textarea id="message" dir="auto" placeholder="Type a message, or click 🎤 and talk…" rows="1"></textarea>
+    <button class="mic" id="mic-button" type="button" title="Click and talk">🎤</button>
+    <button class="send" id="send-button" type="submit">Send</button>
+  </form>
+
+<script>
+  // ================================================================
+  // SETTINGS -- the easiest things to change
+  // ================================================================
+
+  // CHANGE ME: the assistant's personality. Describe how it should behave,
+  // in plain English, as if you were briefing a new helper.
+  const PERSONALITY = `You are a friendly, patient assistant.
+Explain things simply, like you're talking to a smart friend who is new to the topic.
+Keep answers short unless asked for more detail.
+Always reply in the same language the user writes in (for example English or Persian/Farsi).`;
+
+  // Which Google AI model to use. These come from the Google Gemini section
+  // of your awesome-free-byok-models list. If the first one is busy or out of
+  // free requests, the app automatically tries the next one.
+  // "lite" goes first because it answers fastest (about 1 second).
+  const MODELS = ["gemini-flash-lite-latest", "gemini-flash-latest"];
+
+  // If the AI sends nothing for this many seconds, give up so the page never freezes.
+  const TIMEOUT_SECONDS = 30;
+
+  // The longest voice message you can record, in seconds.
+  const MAX_RECORDING_SECONDS = 60;
+
+  // true = send your message as soon as you stop talking.
+  // false = put what you said in the box so you can check it, then press Send yourself.
+  const SEND_WHEN_I_STOP_TALKING = true;
+
+  // The first message the assistant shows. CHANGE ME if you like.
+  const WELCOME = "Hi! I'm your AI assistant. Ask me anything.";
+
+  // ================================================================
+  // HOW IT WORKS -- you don't need to change anything below to use it
+  // ================================================================
+
+  const chatBox = document.getElementById("chat");
+  const form = document.getElementById("message-form");
+  const messageBox = document.getElementById("message");
+  const sendButton = document.getElementById("send-button");
+
+  // The conversation so far. The AI has no memory of its own, so every time
+  // we send the WHOLE conversation, so it knows what was said before.
+  const history = [];
+
+  // ---- Your key: saved in this browser only ----
+  function getKey() {
+    try { return localStorage.getItem("google-ai-key") || ""; } catch (e) { return ""; }
+  }
+  function saveKey(key) {
+    try { localStorage.setItem("google-ai-key", key); } catch (e) { /* private window: key lasts until you close the tab */ }
+    window.currentKey = key;
+  }
+
+  function showChat() {
+    document.getElementById("key-screen").hidden = true;
+    chatBox.hidden = false;
+    form.hidden = false;
+    document.getElementById("forget-key").hidden = false;
+    document.getElementById("model-label").textContent = "Powered by Google " + MODELS[0];
+    if (chatBox.children.length === 0) addBubble("ai", WELCOME);
+    messageBox.focus();
+  }
+
+  document.getElementById("save-key").addEventListener("click", () => {
+    // Clean up anything copied by accident: spaces, line breaks, quote marks.
+    const key = document.getElementById("key-input").value.replace(/[\s"'`]/g, "");
+    if (key.length < 20) {
+      alert("That looks too short to be a key. Copy the whole key from Google AI Studio and paste it again.");
+      return;
+    }
+    // Google checks whether the key is real when you send your first message.
+    saveKey(key);
+    showChat();
+  });
+
+  document.getElementById("forget-key").addEventListener("click", () => {
+    try { localStorage.removeItem("google-ai-key"); } catch (e) {}
+    window.currentKey = "";
+    location.reload();
+  });
+
+  // ---- Showing messages on the page ----
+  function addBubble(who, text) {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble " + who;
+    bubble.dir = "auto";                  // Farsi reads right-to-left, English left-to-right
+    if (who === "ai") bubble.innerHTML = simpleFormat(text);
+    else bubble.textContent = text;
+    chatBox.appendChild(bubble);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    return bubble;
+  }
+
+  // The AI writes in "Markdown" (e.g. **bold**, `code`, "* " for bullet points).
+  // This turns the most common bits into nicely formatted text.
+  function simpleFormat(text) {
+    const safe = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return safe
+      .replace(/```[a-z]*\n?([\s\S]*?)```/g, "<pre><code>$1</code></pre>")
+      .replace(/`([^`\n]+)`/g, "<code>$1</code>")
+      .replace(/^#{1,6} +(.+)$/gm, "<b>$1</b>")          // headings -> bold
+      .replace(/^(\s*)[*-] +/gm, "$1• ")                 // bullet points
+      .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+      .replace(/\n{3,}/g, "\n\n");
+  }
+
+  // ---- Talking to the AI ----
+  // "Streaming": instead of waiting for the whole answer, Google sends it in
+  // small pieces as it's written. onText() is called each time a piece
+  // arrives, so the words appear on screen right away.
+  async function askAI(modelName, onText, signal) {
+    const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/" + modelName + ":streamGenerateContent?alt=sse",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": window.currentKey || getKey(),   // your key proves who is asking
+        },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: PERSONALITY }] },
+          contents: history,
+        }),
+        signal,                                              // lets us cancel the request
+      }
+    );
+
+    if (!response.ok) {
+      let message = "Something went wrong (error " + response.status + ").";
+      try {
+        const data = await response.json();
+        const err = Array.isArray(data) ? data[0]?.error : data.error;
+        if (err && err.message) message = err.message;
+      } catch (e) {}
+      const error = new Error(message);
+      error.status = response.status;
+      throw error;
+    }
+
+    // Read the answer piece by piece. Each piece arrives as a line starting with "data: ".
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let leftover = "";
+    let fullText = "";
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      leftover += decoder.decode(value, { stream: true });
+      const lines = leftover.split("\n");
+      leftover = lines.pop();                                // keep any half-received line for next time
+      for (const line of lines) {
+        if (!line.startsWith("data: ")) continue;
+        const piece = JSON.parse(line.slice(6));
+        if (piece.error) throw new Error(piece.error.message);
+        const parts = piece.candidates?.[0]?.content?.parts || [];
+        fullText += parts.map((p) => p.text || "").join("");
+        onText(fullText);
+      }
+    }
+    return fullText || "(The AI sent an empty reply. Try asking again.)";
+  }
+
+  // Try each model in the MODELS list until one answers.
+  async function askWithBackup(onText, signal) {
+    let lastError;
+    for (const model of MODELS) {
+      let gotText = false;
+      try {
+        return await askAI(model, (t) => { gotText = true; onText(t); }, signal);
+      } catch (error) {
+        lastError = error;
+        // 429 = out of free requests for now, 503 = too busy. Try the next model,
+        // but only if this one hadn't started answering yet.
+        if (gotText || (error.status !== 429 && error.status !== 503)) break;
+      }
+    }
+    throw lastError;
+  }
+
+  // While the AI is answering, the Send button becomes a Stop button.
+  let currentRequest = null;
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();               // stop the page from reloading
+
+    // Already waiting for an answer? Then this click means "Stop".
+    if (currentRequest) {
+      currentRequest.abort("stopped");
+      return;
+    }
+
+    const text = messageBox.value.trim();
+    if (!text) return;
+
+    addBubble("you", text);
+    history.push({ role: "user", parts: [{ text }] });
+    messageBox.value = "";
+    sendButton.textContent = "Stop";
+
+    const bubble = addBubble("ai", "Thinking…");
+    bubble.classList.add("thinking");
+
+    // The timer: if nothing arrives for TIMEOUT_SECONDS, cancel the request.
+    const controller = new AbortController();
+    currentRequest = controller;
+    let timer = setTimeout(() => controller.abort("timeout"), TIMEOUT_SECONDS * 1000);
+    let shownText = "";
+
+    try {
+      const reply = await askWithBackup((partial) => {
+        // A new piece of the answer arrived: show it and restart the timer.
+        clearTimeout(timer);
+        timer = setTimeout(() => controller.abort("timeout"), TIMEOUT_SECONDS * 1000);
+        shownText = partial;
+        bubble.classList.remove("thinking");
+        bubble.innerHTML = simpleFormat(partial);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, controller.signal);
+      bubble.innerHTML = simpleFormat(reply);
+      bubble.classList.remove("thinking");
+      history.push({ role: "model", parts: [{ text: reply }] });
+    } catch (error) {
+      const why = controller.signal.reason;
+      if (why === "stopped" && shownText) {
+        // You pressed Stop partway through: keep what was written so far.
+        bubble.innerHTML = simpleFormat(shownText + " …(stopped)");
+        history.push({ role: "model", parts: [{ text: shownText }] });
+      } else {
+        bubble.remove();
+        history.pop();                    // forget the message that failed, so you can resend it
+        let help = error.message;
+        if (why === "stopped") help = "Stopped. Your message is back in the box if you want to send it again.";
+        else if (why === "timeout") help = "Google took too long to answer, so I stopped waiting. Press Send to try again.";
+        else if (error.status === 400 || error.status === 403) help = "Google didn't accept your key. Click \"Remove my key\" at the top and paste it again. (" + error.message + ")";
+        else if (error.status === 429) help = "You've used your free requests for now. Wait a minute and try again.";
+        else if (error instanceof TypeError) help = "Couldn't reach Google. Check your internet connection.";
+        addBubble("error", help);
+        messageBox.value = text;          // put your message back in the box
+      }
+    } finally {
+      clearTimeout(timer);
+      currentRequest = null;
+      sendButton.textContent = "Send";
+      messageBox.focus();
+    }
+  });
+
+  // ---- The microphone ----
+  // Click 🎤 to start recording, click again when you're done. Your recording is
+  // sent to the same Google AI, which writes down what you said in whatever
+  // language you spoke (English, Farsi, or both mixed). No language switching needed.
+  const micButton = document.getElementById("mic-button");
+  let recorder = null;
+  let recordingTimer = null;
+
+  micButton.addEventListener("click", async () => {
+    if (recorder) {                       // already recording: this click means "I'm done"
+      recorder.stop();
+      return;
+    }
+    if (!navigator.mediaDevices || !window.MediaRecorder) {
+      addBubble("error", "This browser can't record your voice. Open Rad Solutions AI in Google Chrome or Safari instead.");
+      return;
+    }
+
+    let microphone;
+    try {
+      microphone = await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (error) {
+      addBubble("error", error.name === "NotFoundError"
+        ? "No microphone was found. Check that one is connected and switched on."
+        : "Your browser blocked the microphone. Click Allow when it asks (or click the icon in the address bar and allow the microphone), then click 🎤 again.");
+      return;
+    }
+
+    const pieces = [];
+    recorder = new MediaRecorder(microphone);
+    recorder.ondataavailable = (event) => pieces.push(event.data);
+    recorder.onstop = async () => {
+      clearTimeout(recordingTimer);
+      microphone.getTracks().forEach((track) => track.stop());   // turn the microphone off
+      recorder = null;
+      micButton.classList.remove("listening");
+      micButton.title = "Click and talk";
+      await turnSpeechIntoText(new Blob(pieces));
+    };
+
+    recorder.start();
+    micButton.classList.add("listening");
+    micButton.title = "Recording… click when you're done";
+    recordingTimer = setTimeout(() => recorder && recorder.stop(), MAX_RECORDING_SECONDS * 1000);
+  });
+
+  async function turnSpeechIntoText(recording) {
+    const status = addBubble("ai", "Listening to your recording…");
+    status.classList.add("thinking");
+    micButton.disabled = true;
+    try {
+      const audio = await toWavBase64(recording);
+      const heard = (await askAIOnce([
+        { inlineData: { mimeType: "audio/wav", data: audio } },
+        { text: "Write down exactly what is said in this recording, word for word, in the language it is spoken in (English, Persian/Farsi, or a mix). Use Persian script for Persian. Reply with only the words that were said, nothing else. If nothing was said, reply with just: (silence)" },
+      ])).trim();
+      status.remove();
+      if (!heard || heard === "(silence)") {
+        addBubble("error", "I didn't hear anything. Click 🎤, talk, then click 🎤 again when you're done.");
+        return;
+      }
+      messageBox.value = (messageBox.value ? messageBox.value + " " : "") + heard;
+      if (SEND_WHEN_I_STOP_TALKING && !currentRequest) form.requestSubmit();
+    } catch (error) {
+      status.remove();
+      addBubble("error", "Couldn't understand the recording: " + error.message);
+    } finally {
+      micButton.disabled = false;
+    }
+  }
+
+  // Ask the AI one question that isn't part of the chat (used to write down your speech).
+  async function askAIOnce(parts) {
+    let lastError;
+    for (const model of MODELS) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), TIMEOUT_SECONDS * 1000);
+      try {
+        const response = await fetch(
+          "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "x-goog-api-key": window.currentKey || getKey() },
+            body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig: { temperature: 0 } }),
+            signal: controller.signal,
+          }
+        );
+        const data = await response.json();
+        if (!response.ok) {
+          const error = new Error(data.error ? data.error.message : "error " + response.status);
+          error.status = response.status;
+          throw error;
+        }
+        return (data.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
+      } catch (error) {
+        lastError = controller.signal.aborted ? new Error("Google took too long to answer. Try again.") : error;
+        if (error.status !== 429 && error.status !== 503) break;   // only try the backup model if busy
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+    throw lastError;
+  }
+
+  // Browsers record in different formats. This converts the recording into a
+  // small, simple WAV file (16,000 samples per second, one channel) that Google
+  // understands, then into text-safe "base64" so it can travel inside the request.
+  async function toWavBase64(recording) {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    const context = new AudioCtx();
+    const decoded = await context.decodeAudioData(await recording.arrayBuffer());
+    context.close();
+    const rate = 16000;
+    const offline = new OfflineAudioContext(1, Math.max(1, Math.ceil(decoded.duration * rate)), rate);
+    const source = offline.createBufferSource();
+    source.buffer = decoded;
+    source.connect(offline.destination);
+    source.start();
+    const samples = (await offline.startRendering()).getChannelData(0);
+
+    const wav = new DataView(new ArrayBuffer(44 + samples.length * 2));
+    const writeText = (offset, text) => [...text].forEach((c, i) => wav.setUint8(offset + i, c.charCodeAt(0)));
+    writeText(0, "RIFF"); wav.setUint32(4, 36 + samples.length * 2, true); writeText(8, "WAVE");
+    writeText(12, "fmt "); wav.setUint32(16, 16, true); wav.setUint16(20, 1, true); wav.setUint16(22, 1, true);
+    wav.setUint32(24, rate, true); wav.setUint32(28, rate * 2, true); wav.setUint16(32, 2, true); wav.setUint16(34, 16, true);
+    writeText(36, "data"); wav.setUint32(40, samples.length * 2, true);
+    samples.forEach((s, i) => wav.setInt16(44 + i * 2, Math.max(-1, Math.min(1, s)) * 0x7fff, true));
+
+    const bytes = new Uint8Array(wav.buffer);
+    let binary = "";
+    for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+    return btoa(binary);
+  }
+
+  // Press Enter to send, Shift+Enter for a new line.
+  messageBox.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      if (currentRequest) return;         // still answering: Enter does nothing (use the Stop button)
+      form.requestSubmit();
+    }
+  });
+
+  // When the page opens: if a key is already saved, go straight to the chat.
+  if (getKey()) showChat();
+</script>
+</body>
+</html>
