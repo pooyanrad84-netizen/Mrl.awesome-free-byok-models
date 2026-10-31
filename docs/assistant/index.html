@@ -84,6 +84,22 @@
   .bubble code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14px; }
   .thinking { color: var(--soft-text); font-style: italic; }
 
+  /* The small 🔊 button under each answer */
+  .speak {
+    display: block;
+    margin-top: 8px;
+    border: 1px solid var(--border);
+    background: none;
+    border-radius: 8px;
+    padding: 2px 10px;
+    font: inherit;
+    font-size: 13px;
+    color: var(--soft-text);
+    cursor: pointer;
+  }
+  .speak:hover { color: var(--text); }
+  .speak:disabled { cursor: wait; }
+
   /* The box at the bottom where you type */
   form {
     display: flex;
@@ -203,6 +219,19 @@ Always reply in the same language the user writes in (for example English or Per
   // true = send your message as soon as you stop talking.
   // false = put what you said in the box so you can check it, then press Send yourself.
   const SEND_WHEN_I_STOP_TALKING = true;
+
+  // ---- The speaker 🔊 ----
+  // true = when you talk to it with 🎤, it answers out loud too.
+  // (When you type, click 🔊 under any answer to hear it.)
+  const READ_ALOUD_WHEN_I_SPEAK = true;
+
+  // CHANGE ME: the voice. Try "Kore" (calm), "Puck" (upbeat), "Charon" (deep),
+  // "Aoede" (bright), "Fenrir" (energetic) or "Zephyr" (light).
+  const VOICE_NAME = "Kore";
+
+  // Google's voice models, from your list. If they're busy, your computer's
+  // own built-in voice reads the answer instead.
+  const VOICE_MODELS = ["gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts", "gemini-2.5-flash-preview-tts"];
 
   // The first message the assistant shows. CHANGE ME if you like.
   const WELCOME = "Hi! I'm your AI assistant. Ask me anything.";
@@ -369,6 +398,9 @@ Always reply in the same language the user writes in (for example English or Per
 
     const text = messageBox.value.trim();
     if (!text) return;
+    const cameFromVoice = nextMessageIsVoice;   // did you say this with 🎤?
+    nextMessageIsVoice = false;
+    stopSpeaking();
 
     addBubble("you", text);
     history.push({ role: "user", parts: [{ text }] });
@@ -395,6 +427,8 @@ Always reply in the same language the user writes in (for example English or Per
         chatBox.scrollTop = chatBox.scrollHeight;
       }, controller.signal);
       bubble.innerHTML = simpleFormat(reply);
+      const speakButton = addSpeakButton(bubble, reply);
+      if (cameFromVoice && READ_ALOUD_WHEN_I_SPEAK) speak(reply, speakButton);
       bubble.classList.remove("thinking");
       history.push({ role: "model", parts: [{ text: reply }] });
     } catch (error) {
@@ -463,6 +497,7 @@ Always reply in the same language the user writes in (for example English or Per
       await turnSpeechIntoText(new Blob(pieces));
     };
 
+    stopSpeaking();                       // don't record the assistant's own voice
     recorder.start();
     micButton.classList.add("listening");
     micButton.title = "Recording… click when you're done";
@@ -485,7 +520,10 @@ Always reply in the same language the user writes in (for example English or Per
         return;
       }
       messageBox.value = (messageBox.value ? messageBox.value + " " : "") + heard;
-      if (SEND_WHEN_I_STOP_TALKING && !currentRequest) form.requestSubmit();
+      if (SEND_WHEN_I_STOP_TALKING && !currentRequest) {
+        nextMessageIsVoice = true;
+        form.requestSubmit();
+      }
     } catch (error) {
       status.remove();
       addBubble("error", "Couldn't understand the recording: " + error.message);
@@ -543,18 +581,144 @@ Always reply in the same language the user writes in (for example English or Per
     source.start();
     const samples = (await offline.startRendering()).getChannelData(0);
 
-    const wav = new DataView(new ArrayBuffer(44 + samples.length * 2));
-    const writeText = (offset, text) => [...text].forEach((c, i) => wav.setUint8(offset + i, c.charCodeAt(0)));
-    writeText(0, "RIFF"); wav.setUint32(4, 36 + samples.length * 2, true); writeText(8, "WAVE");
-    writeText(12, "fmt "); wav.setUint32(16, 16, true); wav.setUint16(20, 1, true); wav.setUint16(22, 1, true);
-    wav.setUint32(24, rate, true); wav.setUint32(28, rate * 2, true); wav.setUint16(32, 2, true); wav.setUint16(34, 16, true);
-    writeText(36, "data"); wav.setUint32(40, samples.length * 2, true);
-    samples.forEach((s, i) => wav.setInt16(44 + i * 2, Math.max(-1, Math.min(1, s)) * 0x7fff, true));
-
-    const bytes = new Uint8Array(wav.buffer);
+    const pcm = new DataView(new ArrayBuffer(samples.length * 2));
+    samples.forEach((s, i) => pcm.setInt16(i * 2, Math.max(-1, Math.min(1, s)) * 0x7fff, true));
+    const bytes = new Uint8Array(await makeWav(new Uint8Array(pcm.buffer), rate).arrayBuffer());
     let binary = "";
     for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
     return btoa(binary);
+  }
+
+  // A WAV file is the raw sound (16-bit, one channel) with a 44-byte label in
+  // front saying how to play it.
+  function makeWav(pcmBytes, rate) {
+    const header = new DataView(new ArrayBuffer(44));
+    const writeText = (offset, text) => [...text].forEach((c, i) => header.setUint8(offset + i, c.charCodeAt(0)));
+    writeText(0, "RIFF"); header.setUint32(4, 36 + pcmBytes.length, true); writeText(8, "WAVE");
+    writeText(12, "fmt "); header.setUint32(16, 16, true); header.setUint16(20, 1, true); header.setUint16(22, 1, true);
+    header.setUint32(24, rate, true); header.setUint32(28, rate * 2, true); header.setUint16(32, 2, true); header.setUint16(34, 16, true);
+    writeText(36, "data"); header.setUint32(40, pcmBytes.length, true);
+    return new Blob([header.buffer, pcmBytes], { type: "audio/wav" });
+  }
+
+  // ---- The speaker 🔊 ----
+  let nextMessageIsVoice = false;
+  let nowPlaying = null;                  // what's being read out loud right now
+
+  function addSpeakButton(bubble, text) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "speak";
+    button.textContent = "🔊 Listen";
+    button.addEventListener("click", () => speak(text, button));
+    bubble.appendChild(button);
+    return button;
+  }
+
+  function stopSpeaking() {
+    if (!nowPlaying) return;
+    if (nowPlaying.audio) {
+      nowPlaying.audio.pause();
+      URL.revokeObjectURL(nowPlaying.audio.src);
+    }
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    nowPlaying.button.textContent = "🔊 Listen";
+    nowPlaying.button.disabled = false;
+    nowPlaying = null;
+  }
+
+  async function speak(text, button) {
+    if (nowPlaying && nowPlaying.button === button) {   // clicked while playing: stop
+      stopSpeaking();
+      return;
+    }
+    stopSpeaking();
+    const words = forReadingAloud(text);
+    const mine = { button };
+    nowPlaying = mine;
+    button.textContent = "🔊 Getting voice…";
+    button.disabled = true;
+
+    let sound = null;
+    try {
+      sound = await googleVoice(words);
+    } catch (error) {
+      // Google's voice isn't available right now: the computer's own voice reads it instead.
+    }
+    if (nowPlaying !== mine) return;      // you pressed something else while waiting
+    button.disabled = false;
+    button.textContent = "⏹ Stop";
+
+    if (sound) {
+      mine.audio = new Audio(URL.createObjectURL(sound));
+      mine.audio.onended = () => nowPlaying === mine && stopSpeaking();
+      try {
+        await mine.audio.play();
+      } catch (error) {
+        stopSpeaking();                   // the browser wants a click first: press 🔊 Listen
+      }
+      return;
+    }
+
+    if (!window.speechSynthesis) {
+      stopSpeaking();
+      addBubble("error", "Couldn't read this answer out loud right now. Try again in a minute.");
+      return;
+    }
+    const voice = new SpeechSynthesisUtterance(words);
+    voice.lang = /[؀-ۿ]/.test(words) ? "fa-IR" : "en-US";   // Farsi letters? use a Farsi voice
+    voice.onend = () => nowPlaying === mine && stopSpeaking();
+    speechSynthesis.speak(voice);
+  }
+
+  // Remove Markdown symbols (*, #, `) so they aren't read out loud.
+  function forReadingAloud(text) {
+    return text
+      .replace(/```[\s\S]*?```/g, " ")
+      .replace(/[*#`•_>]/g, "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 3000);
+  }
+
+  // Ask Google to turn text into speech. It sends back raw sound, which we wrap
+  // into a WAV file the browser can play.
+  async function googleVoice(text) {
+    let lastError;
+    for (const model of VOICE_MODELS) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), TIMEOUT_SECONDS * 1000);
+      try {
+        const response = await fetch(
+          "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "x-goog-api-key": window.currentKey || getKey() },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text }] }],
+              generationConfig: {
+                responseModalities: ["AUDIO"],
+                speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: VOICE_NAME } } },
+              },
+            }),
+            signal: controller.signal,
+          }
+        );
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error ? data.error.message : "error " + response.status);
+        const audio = (data.candidates?.[0]?.content?.parts || []).find((p) => p.inlineData)?.inlineData;
+        if (!audio) throw new Error("No sound came back.");
+        const raw = Uint8Array.from(atob(audio.data), (c) => c.charCodeAt(0));
+        if (/wav/i.test(audio.mimeType)) return new Blob([raw], { type: "audio/wav" });
+        const rate = Number((audio.mimeType.match(/rate=(\d+)/) || [])[1]) || 24000;
+        return makeWav(raw, rate);
+      } catch (error) {
+        lastError = error;                // try the next voice model
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+    throw lastError;
   }
 
   // Press Enter to send, Shift+Enter for a new line.
