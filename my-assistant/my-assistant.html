@@ -115,7 +115,7 @@
   }
   button.send:disabled { opacity: .5; cursor: wait; }
 
-  /* The microphone button. It turns red and pulses while listening. */
+  /* The microphone button. It turns red and pulses while recording. */
   button.mic {
     width: 48px;
     border: 1px solid var(--border);
@@ -130,7 +130,7 @@
     animation: pulse 1.2s ease-in-out infinite;
   }
   @keyframes pulse { 50% { opacity: .6; } }
-  button.mic.language { font-size: 15px; font-weight: 600; color: var(--main-colour); }
+  button.mic:disabled { opacity: .5; cursor: wait; }
 
   /* The "paste your key" screen shown the first time */
   #key-screen {
@@ -172,7 +172,6 @@
   <main id="chat" hidden></main>
   <form id="message-form" hidden>
     <textarea id="message" dir="auto" placeholder="Type a message, or click 🎤 and talk…" rows="1"></textarea>
-    <button class="mic language" id="language-button" type="button" title="Which language you'll speak. Click to switch."></button>
     <button class="mic" id="mic-button" type="button" title="Click and talk">🎤</button>
     <button class="send" id="send-button" type="submit">Send</button>
   </form>
@@ -198,13 +197,8 @@ Always reply in the same language the user writes in (for example English or Per
   // If the AI sends nothing for this many seconds, give up so the page never freezes.
   const TIMEOUT_SECONDS = 30;
 
-  // The languages you can speak into the microphone. The language button next
-  // to 🎤 switches between them. CHANGE ME to add more, e.g.
-  // { code: "es-ES", label: "ES" } for Spanish or { code: "de-DE", label: "DE" } for German.
-  const VOICE_LANGUAGES = [
-    { code: "en-US", label: "EN" },
-    { code: "fa-IR", label: "فا" },
-  ];
+  // The longest voice message you can record, in seconds.
+  const MAX_RECORDING_SECONDS = 60;
 
   // true = send your message as soon as you stop talking.
   // false = put what you said in the box so you can check it, then press Send yourself.
@@ -430,70 +424,138 @@ Always reply in the same language the user writes in (for example English or Per
   });
 
   // ---- The microphone ----
-  // Browsers like Chrome and Safari have speech-to-text built in. It listens,
-  // turns your words into text, and we put that text in the message box.
+  // Click 🎤 to start recording, click again when you're done. Your recording is
+  // sent to the same Google AI, which writes down what you said in whatever
+  // language you spoke (English, Farsi, or both mixed). No language switching needed.
   const micButton = document.getElementById("mic-button");
-  const SpeechToText = window.SpeechRecognition || window.webkitSpeechRecognition;
-  let listener = null;
+  let recorder = null;
+  let recordingTimer = null;
 
-  // The language button: click to switch which language the microphone listens for.
-  // Your choice is remembered in this browser.
-  const languageButton = document.getElementById("language-button");
-  let languageIndex = 0;
-  try { languageIndex = Math.max(0, VOICE_LANGUAGES.findIndex((l) => l.code === localStorage.getItem("voice-language"))); } catch (e) {}
-  function showLanguage() {
-    languageButton.textContent = VOICE_LANGUAGES[languageIndex].label;
-  }
-  languageButton.addEventListener("click", () => {
-    languageIndex = (languageIndex + 1) % VOICE_LANGUAGES.length;
-    try { localStorage.setItem("voice-language", VOICE_LANGUAGES[languageIndex].code); } catch (e) {}
-    showLanguage();
-  });
-  showLanguage();
-
-  micButton.addEventListener("click", () => {
-    if (!SpeechToText) {
-      addBubble("error", "This browser can't listen to your voice. Open Rad Solutions AI in Google Chrome or Safari instead.");
+  micButton.addEventListener("click", async () => {
+    if (recorder) {                       // already recording: this click means "I'm done"
+      recorder.stop();
       return;
     }
-    if (listener) {                       // already listening: this click means "I'm done"
-      listener.stop();
+    if (!navigator.mediaDevices || !window.MediaRecorder) {
+      addBubble("error", "This browser can't record your voice. Open Rad Solutions AI in Google Chrome or Safari instead.");
       return;
     }
 
-    listener = new SpeechToText();
-    listener.lang = VOICE_LANGUAGES[languageIndex].code;
-    listener.interimResults = true;       // show words while you're still talking
-    const typedBefore = messageBox.value ? messageBox.value + " " : "";
-    let heard = "";
+    let microphone;
+    try {
+      microphone = await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (error) {
+      addBubble("error", error.name === "NotFoundError"
+        ? "No microphone was found. Check that one is connected and switched on."
+        : "Your browser blocked the microphone. Click Allow when it asks (or click the icon in the address bar and allow the microphone), then click 🎤 again.");
+      return;
+    }
 
-    listener.onresult = (event) => {
-      heard = Array.from(event.results).map((r) => r[0].transcript).join("");
-      messageBox.value = typedBefore + heard;
-    };
-
-    listener.onerror = (event) => {
-      const help = {
-        "not-allowed": "Your browser blocked the microphone. Allow it when the browser asks (or click the icon in the address bar and choose Allow), then click 🎤 again.",
-        "service-not-allowed": "Your browser blocked the microphone. Allow it when the browser asks, then click 🎤 again.",
-        "no-speech": "I didn't hear anything. Click 🎤 and start talking.",
-        "audio-capture": "No microphone was found. Check that one is connected and switched on.",
-        "network": "Voice typing needs an internet connection. Check your connection and try again.",
-      }[event.error];
-      if (help) addBubble("error", help);
-    };
-
-    listener.onend = () => {
-      listener = null;
+    const pieces = [];
+    recorder = new MediaRecorder(microphone);
+    recorder.ondataavailable = (event) => pieces.push(event.data);
+    recorder.onstop = async () => {
+      clearTimeout(recordingTimer);
+      microphone.getTracks().forEach((track) => track.stop());   // turn the microphone off
+      recorder = null;
       micButton.classList.remove("listening");
       micButton.title = "Click and talk";
-      if (SEND_WHEN_I_STOP_TALKING && heard.trim() && !currentRequest) form.requestSubmit();
+      await turnSpeechIntoText(new Blob(pieces));
     };
 
-    listener.start();
+    recorder.start();
     micButton.classList.add("listening");
-    micButton.title = "Listening… click when you're done";
+    micButton.title = "Recording… click when you're done";
+    recordingTimer = setTimeout(() => recorder && recorder.stop(), MAX_RECORDING_SECONDS * 1000);
   });
+
+  async function turnSpeechIntoText(recording) {
+    const status = addBubble("ai", "Listening to your recording…");
+    status.classList.add("thinking");
+    micButton.disabled = true;
+    try {
+      const audio = await toWavBase64(recording);
+      const heard = (await askAIOnce([
+        { inlineData: { mimeType: "audio/wav", data: audio } },
+        { text: "Write down exactly what is said in this recording, word for word, in the language it is spoken in (English, Persian/Farsi, or a mix). Use Persian script for Persian. Reply with only the words that were said, nothing else. If nothing was said, reply with just: (silence)" },
+      ])).trim();
+      status.remove();
+      if (!heard || heard === "(silence)") {
+        addBubble("error", "I didn't hear anything. Click 🎤, talk, then click 🎤 again when you're done.");
+        return;
+      }
+      messageBox.value = (messageBox.value ? messageBox.value + " " : "") + heard;
+      if (SEND_WHEN_I_STOP_TALKING && !currentRequest) form.requestSubmit();
+    } catch (error) {
+      status.remove();
+      addBubble("error", "Couldn't understand the recording: " + error.message);
+    } finally {
+      micButton.disabled = false;
+    }
+  }
+
+  // Ask the AI one question that isn't part of the chat (used to write down your speech).
+  async function askAIOnce(parts) {
+    let lastError;
+    for (const model of MODELS) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), TIMEOUT_SECONDS * 1000);
+      try {
+        const response = await fetch(
+          "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "x-goog-api-key": window.currentKey || getKey() },
+            body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig: { temperature: 0 } }),
+            signal: controller.signal,
+          }
+        );
+        const data = await response.json();
+        if (!response.ok) {
+          const error = new Error(data.error ? data.error.message : "error " + response.status);
+          error.status = response.status;
+          throw error;
+        }
+        return (data.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
+      } catch (error) {
+        lastError = controller.signal.aborted ? new Error("Google took too long to answer. Try again.") : error;
+        if (error.status !== 429 && error.status !== 503) break;   // only try the backup model if busy
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+    throw lastError;
+  }
+
+  // Browsers record in different formats. This converts the recording into a
+  // small, simple WAV file (16,000 samples per second, one channel) that Google
+  // understands, then into text-safe "base64" so it can travel inside the request.
+  async function toWavBase64(recording) {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    const context = new AudioCtx();
+    const decoded = await context.decodeAudioData(await recording.arrayBuffer());
+    context.close();
+    const rate = 16000;
+    const offline = new OfflineAudioContext(1, Math.max(1, Math.ceil(decoded.duration * rate)), rate);
+    const source = offline.createBufferSource();
+    source.buffer = decoded;
+    source.connect(offline.destination);
+    source.start();
+    const samples = (await offline.startRendering()).getChannelData(0);
+
+    const wav = new DataView(new ArrayBuffer(44 + samples.length * 2));
+    const writeText = (offset, text) => [...text].forEach((c, i) => wav.setUint8(offset + i, c.charCodeAt(0)));
+    writeText(0, "RIFF"); wav.setUint32(4, 36 + samples.length * 2, true); writeText(8, "WAVE");
+    writeText(12, "fmt "); wav.setUint32(16, 16, true); wav.setUint16(20, 1, true); wav.setUint16(22, 1, true);
+    wav.setUint32(24, rate, true); wav.setUint32(28, rate * 2, true); wav.setUint16(32, 2, true); wav.setUint16(34, 16, true);
+    writeText(36, "data"); wav.setUint32(40, samples.length * 2, true);
+    samples.forEach((s, i) => wav.setInt16(44 + i * 2, Math.max(-1, Math.min(1, s)) * 0x7fff, true));
+
+    const bytes = new Uint8Array(wav.buffer);
+    let binary = "";
+    for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+    return btoa(binary);
+  }
 
   // Press Enter to send, Shift+Enter for a new line.
   messageBox.addEventListener("keydown", (event) => {
